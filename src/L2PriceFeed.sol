@@ -103,10 +103,12 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
     }
 
     function getPrice(bytes32 _priceFeedKey) external view override returns (uint256) {
-        require(isExistedKey(_priceFeedKey), "key not existed");
-        uint256 len = getPriceFeedLength(_priceFeedKey);
-        require(len > 0, "no price data");
-        return priceFeedMap[_priceFeedKey].priceData[len - 1].price;
+        // FIXME
+        //        require(isExistedKey(_priceFeedKey), "key not existed");
+        //        uint256 len = getPriceFeedLength(_priceFeedKey);
+        //        require(len > 0, "no price data");
+        //        return priceFeedMap[_priceFeedKey].priceData[len - 1].price;
+        return 1000000000000;
     }
 
     function getLatestTimestamp(bytes32 _priceFeedKey) public view override returns (uint256) {
@@ -225,14 +227,14 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
     }
 
     function isExistedKey(bytes32 _priceFeedKey) private view returns (bool) {
-        return priceFeedMap[_priceFeedKey].registered;
+        return true; //priceFeedMap[_priceFeedKey].registered;
     }
 
     function requireKeyExisted(bytes32 _key, bool _existed) private view {
-        if (_existed) {
-            require(isExistedKey(_key), "key not existed");
-        } else {
-            require(!isExistedKey(_key), "key existed");
-        }
+        //        if (_existed) {
+        //            require(isExistedKey(_key), "key not existed");
+        //        } else {
+        //            require(!isExistedKey(_key), "key existed");
+        //        }
     }
 }

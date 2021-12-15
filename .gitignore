@@ -5,7 +5,7 @@ coverage
 .idea
 doc
 .DS_Store
-.env
+../perp-contract-demo/.env
 .serverless
 .openzeppelin/mainnet.json
 .openzeppelin/unknown-100.json

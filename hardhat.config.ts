@@ -27,6 +27,9 @@ import {
     SOKOL_MNEMONIC,
     SOKOL_URL,
     SRC_DIR,
+    TBSC_GAS_PRICE,
+    TBSC_MNEMONIC,
+    TBSC_URL,
     XDAI_MNEMONIC,
     XDAI_URL,
 } from "./constants"
@@ -126,6 +129,13 @@ const config: HardhatUserConfig = {
             gasPrice: GAS_PRICE,
             accounts: {
                 mnemonic: XDAI_MNEMONIC,
+            },
+        },
+        tbsc: {
+            url: TBSC_URL,
+            gasPrice: TBSC_GAS_PRICE,
+            accounts: {
+                mnemonic: TBSC_MNEMONIC,
             },
         },
     },

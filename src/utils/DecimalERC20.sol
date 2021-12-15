@@ -141,9 +141,6 @@ abstract contract DecimalERC20 {
         uint256 _roundedDownValue,
         Decimal.decimal memory _balanceBefore
     ) private view {
-        require(
-            _balanceOf(_token, _to).cmp(_balanceBefore.addD(_toDecimal(_token, _roundedDownValue))) == 0,
-            "DecimalERC20: balance inconsistent"
-        );
+        require(_balanceOf(_token, _to).cmp(_balanceBefore.addD(_toDecimal(_token, _roundedDownValue))) == 0, "BI");
     }
 }

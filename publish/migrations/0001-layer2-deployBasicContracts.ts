@@ -100,7 +100,7 @@ const migration: MigrationDefinition = {
             console.log("deploy ETHUSDC amm...")
             const ammName = AmmInstanceName.ETHUSDC
             const l2PriceFeedContract = context.factory.create<L2PriceFeed>(ContractFullyQualifiedName.L2PriceFeed)
-            const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
+            const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.Amm)
             const quoteTokenAddr = context.externalContract.usdc!
             await ammContract.deployUpgradableContract(
                 context.deployConfig.legacyAmmConfigMap[ammName].deployArgs,
@@ -112,7 +112,7 @@ const migration: MigrationDefinition = {
             console.log("deploy BTCUSDC amm...")
             const l2PriceFeedContract = context.factory.create<L2PriceFeed>(ContractFullyQualifiedName.L2PriceFeed)
             const ammName = AmmInstanceName.BTCUSDC
-            const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.AmmV1)
+            const ammContract = context.factory.createAmm(ammName, ContractFullyQualifiedName.Amm)
             const quoteTokenAddr = context.externalContract.usdc!
             await ammContract.deployUpgradableContract(
                 context.deployConfig.legacyAmmConfigMap[ammName].deployArgs,
@@ -167,7 +167,7 @@ const migration: MigrationDefinition = {
         async (): Promise<void> => {
             console.log("set ETH amm Cap...")
             const amm = await context.factory
-                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             const { maxHoldingBaseAsset, openInterestNotionalCap } = context.deployConfig.legacyAmmConfigMap[
                 AmmInstanceName.ETHUSDC
@@ -184,7 +184,7 @@ const migration: MigrationDefinition = {
                 ContractFullyQualifiedName.ClearingHouse,
             )
             const amm = await context.factory
-                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             await (await amm.setCounterParty(clearingHouseContract.address!)).wait(context.deployConfig.confirmations)
         },
@@ -193,14 +193,14 @@ const migration: MigrationDefinition = {
             const insuranceFundContract = context.factory.create<InsuranceFund>(
                 ContractFullyQualifiedName.InsuranceFund,
             )
-            const ammContract = context.factory.createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.AmmV1)
+            const ammContract = context.factory.createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.Amm)
             const insuranceFund = await insuranceFundContract.instance()
             await (await insuranceFund.addAmm(ammContract.address!)).wait(context.deployConfig.confirmations)
         },
         async (): Promise<void> => {
             console.log("set BTC amm Cap...")
             const amm = await context.factory
-                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             const { maxHoldingBaseAsset, openInterestNotionalCap } = context.deployConfig.legacyAmmConfigMap[
                 AmmInstanceName.BTCUSDC
@@ -217,7 +217,7 @@ const migration: MigrationDefinition = {
                 ContractFullyQualifiedName.ClearingHouse,
             )
             const amm = await context.factory
-                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             await (await amm.setCounterParty(clearingHouseContract.address!)).wait(context.deployConfig.confirmations)
         },
@@ -226,7 +226,7 @@ const migration: MigrationDefinition = {
             const insuranceFundContract = context.factory.create<InsuranceFund>(
                 ContractFullyQualifiedName.InsuranceFund,
             )
-            const ammContract = context.factory.createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.AmmV1)
+            const ammContract = context.factory.createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.Amm)
             const insuranceFund = await insuranceFundContract.instance()
             await (await insuranceFund.addAmm(ammContract.address!)).wait(context.deployConfig.confirmations)
         },
@@ -244,14 +244,14 @@ const migration: MigrationDefinition = {
         async (): Promise<void> => {
             console.log("opening Amm ETHUSDC...")
             const ethUsdc = await context.factory
-                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             await (await ethUsdc.setOpen(true)).wait(context.deployConfig.confirmations)
         },
         async (): Promise<void> => {
             console.log("opening Amm BTCUSDC...")
             const btcUsdc = await context.factory
-                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             await (await btcUsdc.setOpen(true)).wait(context.deployConfig.confirmations)
         },
@@ -309,7 +309,7 @@ const migration: MigrationDefinition = {
             const gov = context.externalContract.foundationGovernance!
             console.log(`transferring ETHUSDC owner to governance=${gov}...please remember to claim the ownership`)
             const ETHUSDC = await context.factory
-                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.ETHUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             await (await ETHUSDC.setOwner(gov)).wait(context.deployConfig.confirmations)
         },
@@ -317,7 +317,7 @@ const migration: MigrationDefinition = {
             const gov = context.externalContract.foundationGovernance!
             console.log(`transferring BTCUSDC owner to governance=${gov}...please remember to claim the ownership`)
             const BTCUSDC = await context.factory
-                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.AmmV1)
+                .createAmm(AmmInstanceName.BTCUSDC, ContractFullyQualifiedName.Amm)
                 .instance()
             await (await BTCUSDC.setOwner(gov)).wait(context.deployConfig.confirmations)
         },
