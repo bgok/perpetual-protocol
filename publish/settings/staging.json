@@ -1,35 +1,35 @@
 {
   "layers": {
     "layer1": {
-      "chainId": 4,
-      "network": "rinkeby",
+      "chainId": 97,
+      "network": "tbsc",
       "externalContracts": {
         "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
         "rewardGovernance": "0x7cd11681690d25DAA202550E1B3F314C74A0Acd6",
-        "perp": "0xaFfB148304D38947193785D194972a7d0d9b7F68",
-        "tether": "0x40D3B2F06f198D2B789B823CdBEcD1DB78090D74",
-        "usdc": "0x40D3B2F06f198D2B789B823CdBEcD1DB78090D74",
+        "perp": "0x0078371BDeDE8aAc7DeBfFf451B74c5EDB385Af7",
+        "tether": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+        "usdc": "0xaa25Aa7a19f9c426E07dee59b12f944f4d9f1DD3",
         "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
         "ambBridgeOnEth": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "multiTokenMediatorOnEth": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB"
       }
     },
     "layer2": {
-      "chainId": 100,
-      "network": "xdai",
+      "chainId": 97,
+      "network": "tbsc",
       "externalContracts": {
-        "foundationGovernance": "0x44883405Eb9826448d3E8eCC25889C5941E79d9b",
+        "foundationGovernance": "0xAa7E68d7f2e47ebffe0494B0CB019518ce1288Fc",
         "arbitrageur": "0x68dfc526037E9030c8F813D014919CC89E7d4d74",
         "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
-        "ambBridgeOnXDai": "0xc38D4991c951fE8BCE1a12bEef2046eF36b0FA4A",
-        "multiTokenMediatorOnXDai": "0xA34c65d76b997a824a5E384471bBa73b0013F5DA",
-        "tether": "0xe0B887D54e71329318a036CF50f30Dbe4444563c",
-        "usdc": "0xe0B887D54e71329318a036CF50f30Dbe4444563c"
+        "ambBridgeOnXDai": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
+        "multiTokenMediatorOnXDai": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
+        "tether": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
+        "usdc": "0xaa25Aa7a19f9c426E07dee59b12f944f4d9f1DD3"
       }
     }
   },
   "nextMigration": {
-    "batchIndex": 35,
+    "batchIndex": 3,
     "taskIndex": 0
   }
 }
