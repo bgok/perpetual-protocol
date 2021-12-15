@@ -2,8 +2,8 @@
   "manifestVersion": "3.1",
   "impls": {
     "523da93e0936c442409ebc9cc4dd87f6b202cdd9d7bb15d9d9eb1d42867ee032": {
-      "address": "0xa480E0586f424E012e9b1Cb13B6b2B01E9844E5B",
-      "txHash": "0x8c1f866a260c040449fd69d1d2430387e47760d9ddad11992c69878fd87c966a",
+      "address": "0xd33764AE535AfE50AfdBeCa745454C83ec8fa10A",
+      "txHash": "0xba0f2eb71524cd4ecd54304130543f06b0428b7ffea43f9a5fcc0f1523e4af8e",
       "layout": {
         "storage": [
           {
@@ -46,7 +46,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "DecimalERC20",
@@ -120,8 +120,8 @@
       }
     },
     "8f6af920f26cf0083a191c46e0b72f6b1ce5aa2736f2059a17b1770fc0012c69": {
-      "address": "0xE4e71Cf6B2a229D7e91471a5044dFeDc37fca683",
-      "txHash": "0x8f9a4cf90ae7264771bc74d9bbebfdb98edf8c2a677e4474b2d2e98cf2d85e7d",
+      "address": "0x234951A9EF2c6d8D380C01c3174B09C296c36299",
+      "txHash": "0x2b9dcfe5582c3dbc2d28efcf8e91f5be98f5586c9f103ed389976d38d7b770d6",
       "layout": {
         "storage": [
           {
@@ -164,7 +164,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "LowLevelErrorMessage",
@@ -229,8 +229,8 @@
       }
     },
     "6bbad8da3cc85f2a9bc956af9a0bf15303c97f6ad81ba9e659275b77b023f3cf": {
-      "address": "0xe5B3b3cEEc348F063d91B2ceB7460C708aADF0C2",
-      "txHash": "0x0c6dc8529b84c4b293e7aed7dd7b7af4777ed47b27b465a81747cb612e44702e",
+      "address": "0xd09e96bF1e0C86b9592c7E74bEc884c7d2Ec7ed8",
+      "txHash": "0xa703d2df026f44c35312db9f6894b94ce30276e894d80f7d34378cff78a69f83",
       "layout": {
         "storage": [
           {
@@ -273,7 +273,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "DecimalERC20",
@@ -374,8 +374,8 @@
       }
     },
     "69642985c6424333d58748cdd14fcae5e4377ddcf02a39a0754cbc6661152296": {
-      "address": "0x2609D96c92B1Cde426c0703Ea1b219777E1Fe094",
-      "txHash": "0x2414da48356f29cd55457f4263737ff2ab29799e86095fcd45abde670aa57e6c",
+      "address": "0xf062ba1A99434B414e5299bF7bFc8796c05B27c4",
+      "txHash": "0x028927c88c79c78e6ef23e0b3cc84e72cf2048ff306da6c281f5fae945923734",
       "layout": {
         "storage": [
           {
@@ -418,7 +418,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "BlockContext",
@@ -558,8 +558,8 @@
       }
     },
     "f43791289a24db51cf18d0a41ee336996ceafb51018bf2d75b6699d55f7c81c3": {
-      "address": "0xf742eA18447A51b5eEb64E2196D2740cD6367499",
-      "txHash": "0x583a26f5419ac75d2d7c436765f08a18e2e853ad2c0e637820c21e0331f68b38",
+      "address": "0xfb72a5b79b8201c755a701496fc5dBE4bE5CBaAA",
+      "txHash": "0xbcd14b1f41ca741773480edd456d5891a17a746a3a8e37e9f5632c0019d19427",
       "layout": {
         "storage": [
           {
@@ -602,7 +602,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "BlockContext",
@@ -700,8 +700,8 @@
       }
     },
     "777ec503009eb8d4bdc8ac7564d599bc2420f5844763bb4333aa673f32e2b3fb": {
-      "address": "0x5E45Cc4D85bE7311Fd561DeA43666508bff03DbC",
-      "txHash": "0x4a7d9b9a0a9d18245b5798dec08aa38026166630eb85ed750dfdf978d6eca96f",
+      "address": "0x141eD553561256BcAb2a6c1D4e5E6D47E3D9E6eb",
+      "txHash": "0x2dfaa6435582a1ce04694f468c15ad910b8571119a2e51053276d933dc5ad75d",
       "layout": {
         "storage": [
           {
@@ -756,7 +756,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "PausableUpgradeSafe",
@@ -984,8 +984,8 @@
       }
     },
     "387d47cb1992ef465086dd6e7a3381dfc51c0038fd08fc1a6f9eb7808b46eba0": {
-      "address": "0xe7D35E15aC4e707858B40f7067d8FB4BC08664da",
-      "txHash": "0x897cd04ea1bedfc032511f761a63aa31b31728a306ac3b446f4bce2e28d5e270",
+      "address": "0xb7862F8573Ab7D5Be038A63d65a549ff01fC957F",
+      "txHash": "0xad7fc37e175424a6cfcee85f19a59e3bfccc697a2fc62e3e672e69182a7c7627",
       "layout": {
         "storage": [
           {
@@ -1028,7 +1028,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "BlockContext",
@@ -1300,8 +1300,8 @@
       }
     },
     "6313725d31f99a118012b082ddedfdaae5cdc5db6b87bad272fbc852be49442d": {
-      "address": "0x02E932A01b23D8A619f4f1A78A776ebABF51e5C5",
-      "txHash": "0x2a88b57798287a2ad272093bfc2fd36c81621cc66d14bfd4251f3eacd6306bef",
+      "address": "0x86fFb2976800c56f7e8E916a26C06e97AFab421A",
+      "txHash": "0x40c1c74e80591579ad81f3b5dc2d7ceb635ae4b88494b3670aef2f913924a1ee",
       "layout": {
         "storage": [
           {
@@ -1344,7 +1344,7 @@
             "contract": "PerpFiOwnableUpgrade",
             "label": "__gap",
             "type": "t_array(t_uint256)50_storage",
-            "src": "src/utils/PerpFiOwnableUpgrade.sol:95"
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:107"
           },
           {
             "contract": "BlockContext",
@@ -1425,7 +1425,7 @@
     }
   },
   "admin": {
-    "address": "0x1e112FD214b3df9f69a30263E7D5C2687001a520",
-    "txHash": "0xa9006565a3c06febcb6db9157429c71e7c86aed28dc61fe343bf2f6e371528cf"
+    "address": "0x9b35fF69950239e20Bc4c88E925f681645BDc3cD",
+    "txHash": "0x7b2664db9e52fcd825dd4c901b114eb4e2884d071c7799aad5f8702036e74f61"
   }
 }

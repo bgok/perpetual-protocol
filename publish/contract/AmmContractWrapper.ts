@@ -34,8 +34,7 @@ export class AmmContractWrapper extends ContractWrapper<Amm> {
 
         const priceFeedKeyBytes = ethers.utils.formatBytes32String(priceFeedKey.toString())
         const priceInWei = await fetchPrice(priceFeedAddress, priceFeedKeyBytes)
-        // FIXME
-        const updatedQuoteAssetReserve = 1//baseAssetReserve.mul(priceInWei).div(BigNumber.from(10).pow(18))
+        const updatedQuoteAssetReserve = baseAssetReserve.mul(priceInWei).div(BigNumber.from(10).pow(18))
 
         const args = [
             updatedQuoteAssetReserve.toString(),
