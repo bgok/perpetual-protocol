@@ -8,12 +8,26 @@ import { ContractWrapper } from "./ContractWrapper"
 import { AmmDeployArgs } from "./DeployConfig"
 
 async function fetchPrice(feedAddress: string, feedKey: string): Promise<BigNumber> {
-    const priceContract = (await ethers.getContractAt("IPriceFeed", feedAddress)) as IPriceFeed
-    try {
-        return priceContract.getPrice(feedKey)
-    } catch {
-        throw new Error("Wrong price feed address or key")
+    // FIXME
+    // const priceContract = (await ethers.getContractAt("IPriceFeed", feedAddress)) as IPriceFeed
+    // try {
+    //     return priceContract.getPrice(feedKey)
+    // } catch {
+    //     throw new Error("Wrong price feed address or key")
+    // }
+    let rate:BigNumber
+    switch (feedKey) {
+        case "ETH":
+            rate = BigNumber.from(4000).mul(BigNumber.from(10).pow(18))
+            break;
+        case "BTC":
+            rate = BigNumber.from(48000).mul(BigNumber.from(10).pow(18))
+            break
+        default:
+            throw new Error("Unknown symbol")
     }
+
+    return Promise.resolve(rate)
 }
 
 export class AmmContractWrapper extends ContractWrapper<Amm> {
@@ -33,7 +47,9 @@ export class AmmContractWrapper extends ContractWrapper<Amm> {
         } = ammDeployArgs
 
         const priceFeedKeyBytes = ethers.utils.formatBytes32String(priceFeedKey.toString())
-        const priceInWei = await fetchPrice(priceFeedAddress, priceFeedKeyBytes)
+        // FIXME
+        // const priceInWei = await fetchPrice(priceFeedAddress, priceFeedKeyBytes)
+        const priceInWei = await fetchPrice(priceFeedAddress, priceFeedKey.toString())
         const updatedQuoteAssetReserve = baseAssetReserve.mul(priceInWei).div(BigNumber.from(10).pow(18))
 
         const args = [

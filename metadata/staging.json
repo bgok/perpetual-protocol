@@ -4,11 +4,11 @@
       "contracts": {
         "RootBridge": {
           "name": "RootBridge",
-          "address": "0xCB69B0647087f0Ef4891A21DA17CC1352339166A"
+          "address": "0x82F892B9c60E9f191e867E5c74D5778081b66082"
         },
         "ChainlinkL1": {
           "name": "ChainlinkL1",
-          "address": "0xf16E1b8a8e8067De354EaB31dde1A0cB05585fb3"
+          "address": "0x54165d488A63df381EA10C01BCF2059c30aeDB51"
         }
       },
       "accounts": [],
@@ -28,39 +28,39 @@
       "contracts": {
         "MetaTxGateway": {
           "name": "MetaTxGateway",
-          "address": "0xDC63113fb74e6bB6D62d5D4A4d180B5f739c6512"
+          "address": "0xBe2EF414f8f5ae0fA438bEe36f7980b3a018c019"
         },
         "ClientBridge": {
           "name": "ClientBridge",
-          "address": "0x55a5e8c838236a18a134CC56B967CC8044E6aCcD"
+          "address": "0xA237bCc469E9881FaD27D52feF6E5dA5504eF9f3"
         },
         "InsuranceFund": {
           "name": "InsuranceFund",
-          "address": "0xdb98C68f95d260a576cCC6c700d6315f3f6e34FC"
+          "address": "0xA4232bEc4E96530e65a42Ee52A463D58EdFF2717"
         },
         "L2PriceFeed": {
           "name": "L2PriceFeed",
-          "address": "0x4e7f423dd23758638Fc69F86db744DE878fC6e58"
+          "address": "0xF20Bb89CA621F67D3327f9cf6CfAF47Eafff2232"
         },
         "ClearingHouse": {
           "name": "ClearingHouse",
-          "address": "0x6d1A6C14CBFf900a79e4b18F82a84E020941509a"
+          "address": "0x92290270EfA0b8d393633b4718d11C0292aE604e"
         },
         "ETHUSDC": {
           "name": "Amm",
-          "address": "0x16F66414cF6624ba3e0eF35Cd58311d9EfBa51e2"
+          "address": "0x3A3547F7c9cB0ce4716639B8B22308CbBC490B3F"
         },
         "BTCUSDC": {
           "name": "Amm",
-          "address": "0x8542f14C6F006419B06025ea43B19aC6fd9e442f"
+          "address": "0xF7AeC0307053c18b3cf69f0fD4180F1F86b09b4E"
         },
         "ClearingHouseViewer": {
           "name": "ClearingHouseViewer",
-          "address": "0x32257f27B0D52fED60858636A135E9c58B22D0d1"
+          "address": "0x82c7cB04555171626597F3eEeb9b2Ed978459eb6"
         },
         "AmmReader": {
           "name": "AmmReader",
-          "address": "0x509773Ee877e049088654CF32415357a8A67a7f2"
+          "address": "0xa481925a14aDccC2E7eF6324Bc2F19F6aB3F20f2"
         }
       },
       "accounts": [],

@@ -15,8 +15,6 @@ export async function deploy(stage: Stage, options?: ExecOptions): Promise<void>
     if ("test" === stage) {
         settings.resetNextMigration()
     }
-    // TODO Remove this (make sure it works first)
-    settings.resetNextMigration() // It thinks the contracts are already deployed
     const nextMigration = settings.getSystemDeploySettings().nextMigration
 
     const basePath = path.join(__dirname, "../publish/migrations")

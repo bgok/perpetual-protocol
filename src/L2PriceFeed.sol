@@ -103,12 +103,10 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
     }
 
     function getPrice(bytes32 _priceFeedKey) external view override returns (uint256) {
-        // FIXME
-        //        require(isExistedKey(_priceFeedKey), "key not existed");
-        //        uint256 len = getPriceFeedLength(_priceFeedKey);
-        //        require(len > 0, "no price data");
-        //        return priceFeedMap[_priceFeedKey].priceData[len - 1].price;
-        return 1000000000000;
+        require(isExistedKey(_priceFeedKey), "key not existed");
+        uint256 len = getPriceFeedLength(_priceFeedKey);
+        require(len > 0, "no price data");
+        return priceFeedMap[_priceFeedKey].priceData[len - 1].price;
     }
 
     function getLatestTimestamp(bytes32 _priceFeedKey) public view override returns (uint256) {

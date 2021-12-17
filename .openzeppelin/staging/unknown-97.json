@@ -2,8 +2,8 @@
   "manifestVersion": "3.1",
   "impls": {
     "523da93e0936c442409ebc9cc4dd87f6b202cdd9d7bb15d9d9eb1d42867ee032": {
-      "address": "0xd33764AE535AfE50AfdBeCa745454C83ec8fa10A",
-      "txHash": "0xba0f2eb71524cd4ecd54304130543f06b0428b7ffea43f9a5fcc0f1523e4af8e",
+      "address": "0x5e911bcBCb5936eA5b8a2a42936166f1343B9C20",
+      "txHash": "0x10197956d40d989255b867a76112014ce7233ac47e03f1b655dbe0bd3c109a0a",
       "layout": {
         "storage": [
           {
@@ -63,13 +63,13 @@
           {
             "contract": "BaseBridge",
             "label": "ambBridge",
-            "type": "t_contract(IAMB)16798",
+            "type": "t_contract(IAMB)16826",
             "src": "src/bridge/BaseBridge.sol:27"
           },
           {
             "contract": "BaseBridge",
             "label": "multiTokenMediator",
-            "type": "t_contract(IMultiTokenMediator)16810",
+            "type": "t_contract(IMultiTokenMediator)16838",
             "src": "src/bridge/BaseBridge.sol:30"
           },
           {
@@ -81,7 +81,7 @@
           {
             "contract": "RootBridge",
             "label": "priceFeed",
-            "type": "t_contract(IPriceFeed)19336",
+            "type": "t_contract(IPriceFeed)19364",
             "src": "src/bridge/ethereum/RootBridge.sol:17"
           },
           {
@@ -92,7 +92,7 @@
           }
         ],
         "types": {
-          "t_contract(IPriceFeed)19336": {
+          "t_contract(IPriceFeed)19364": {
             "label": "contract IPriceFeed"
           },
           "t_array(t_uint256)50_storage": {
@@ -101,10 +101,10 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_contract(IAMB)16798": {
+          "t_contract(IAMB)16826": {
             "label": "contract IAMB"
           },
-          "t_contract(IMultiTokenMediator)16810": {
+          "t_contract(IMultiTokenMediator)16838": {
             "label": "contract IMultiTokenMediator"
           },
           "t_mapping(t_address,t_uint256)": {
@@ -120,8 +120,8 @@
       }
     },
     "8f6af920f26cf0083a191c46e0b72f6b1ce5aa2736f2059a17b1770fc0012c69": {
-      "address": "0x234951A9EF2c6d8D380C01c3174B09C296c36299",
-      "txHash": "0x2b9dcfe5582c3dbc2d28efcf8e91f5be98f5586c9f103ed389976d38d7b770d6",
+      "address": "0x31e944210F3fa5bD6A4e06b3284C1D13B387f8dE",
+      "txHash": "0x72aea9468607fc04accd791ea719a96a1d69ed2a1876ea0d061cdeee8a7b836e",
       "layout": {
         "storage": [
           {
@@ -229,8 +229,8 @@
       }
     },
     "6bbad8da3cc85f2a9bc956af9a0bf15303c97f6ad81ba9e659275b77b023f3cf": {
-      "address": "0xd09e96bF1e0C86b9592c7E74bEc884c7d2Ec7ed8",
-      "txHash": "0xa703d2df026f44c35312db9f6894b94ce30276e894d80f7d34378cff78a69f83",
+      "address": "0x5a46034F3d27A997dc5A1fEEBa5C2EDbcFC72B5F",
+      "txHash": "0x8d015b6f9653b71d6fc02896711080d042182f0f2978d50e605c69035b9042b8",
       "layout": {
         "storage": [
           {
@@ -290,13 +290,13 @@
           {
             "contract": "BaseBridge",
             "label": "ambBridge",
-            "type": "t_contract(IAMB)16798",
+            "type": "t_contract(IAMB)16826",
             "src": "src/bridge/BaseBridge.sol:27"
           },
           {
             "contract": "BaseBridge",
             "label": "multiTokenMediator",
-            "type": "t_contract(IMultiTokenMediator)16810",
+            "type": "t_contract(IMultiTokenMediator)16838",
             "src": "src/bridge/BaseBridge.sol:30"
           },
           {
@@ -326,7 +326,7 @@
           {
             "contract": "ClientBridge",
             "label": "minWithdrawalAmountMap",
-            "type": "t_mapping(t_contract(IERC20)2022,t_struct(decimal)25907_storage)",
+            "type": "t_mapping(t_contract(IERC20)2022,t_struct(decimal)25935_storage)",
             "src": "src/bridge/xDai/ClientBridge.sol:26"
           }
         ],
@@ -340,13 +340,13 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_mapping(t_contract(IERC20)2022,t_struct(decimal)25907_storage)": {
+          "t_mapping(t_contract(IERC20)2022,t_struct(decimal)25935_storage)": {
             "label": "mapping(contract IERC20 => struct Decimal.decimal)"
           },
           "t_contract(IERC20)2022": {
             "label": "contract IERC20"
           },
-          "t_struct(decimal)25907_storage": {
+          "t_struct(decimal)25935_storage": {
             "label": "struct Decimal.decimal",
             "members": [
               {
@@ -358,10 +358,10 @@
           "t_address": {
             "label": "address"
           },
-          "t_contract(IAMB)16798": {
+          "t_contract(IAMB)16826": {
             "label": "contract IAMB"
           },
-          "t_contract(IMultiTokenMediator)16810": {
+          "t_contract(IMultiTokenMediator)16838": {
             "label": "contract IMultiTokenMediator"
           },
           "t_mapping(t_address,t_uint256)": {
@@ -374,8 +374,8 @@
       }
     },
     "69642985c6424333d58748cdd14fcae5e4377ddcf02a39a0754cbc6661152296": {
-      "address": "0xf062ba1A99434B414e5299bF7bFc8796c05B27c4",
-      "txHash": "0x028927c88c79c78e6ef23e0b3cc84e72cf2048ff306da6c281f5fae945923734",
+      "address": "0xdbF375E93073f944c2C429B5252Fa9E5bC5BE3E9",
+      "txHash": "0x559c3976bae5aef3a4d2c66d179ac980b77b7827f20c0c7ff734c8c363e37798",
       "layout": {
         "storage": [
           {
@@ -465,7 +465,7 @@
           {
             "contract": "InsuranceFund",
             "label": "amms",
-            "type": "t_array(t_contract(IAmm)19025)dyn_storage",
+            "type": "t_array(t_contract(IAmm)19053)dyn_storage",
             "src": "src/InsuranceFund.sol:39"
           },
           {
@@ -477,7 +477,7 @@
           {
             "contract": "InsuranceFund",
             "label": "exchange",
-            "type": "t_contract(IExchangeWrapper)19189",
+            "type": "t_contract(IExchangeWrapper)19217",
             "src": "src/InsuranceFund.sol:43"
           },
           {
@@ -489,13 +489,13 @@
           {
             "contract": "InsuranceFund",
             "label": "minter",
-            "type": "t_contract(IMinter)19256",
+            "type": "t_contract(IMinter)19284",
             "src": "src/InsuranceFund.sol:45"
           },
           {
             "contract": "InsuranceFund",
             "label": "inflationMonitor",
-            "type": "t_contract(IInflationMonitor)19205",
+            "type": "t_contract(IInflationMonitor)19233",
             "src": "src/InsuranceFund.sol:46"
           },
           {
@@ -521,10 +521,10 @@
           "t_bool": {
             "label": "bool"
           },
-          "t_array(t_contract(IAmm)19025)dyn_storage": {
+          "t_array(t_contract(IAmm)19053)dyn_storage": {
             "label": "contract IAmm[]"
           },
-          "t_contract(IAmm)19025": {
+          "t_contract(IAmm)19053": {
             "label": "contract IAmm"
           },
           "t_array(t_contract(IERC20)2022)dyn_storage": {
@@ -533,13 +533,13 @@
           "t_contract(IERC20)2022": {
             "label": "contract IERC20"
           },
-          "t_contract(IExchangeWrapper)19189": {
+          "t_contract(IExchangeWrapper)19217": {
             "label": "contract IExchangeWrapper"
           },
-          "t_contract(IMinter)19256": {
+          "t_contract(IMinter)19284": {
             "label": "contract IMinter"
           },
-          "t_contract(IInflationMonitor)19205": {
+          "t_contract(IInflationMonitor)19233": {
             "label": "contract IInflationMonitor"
           },
           "t_array(t_uint256)50_storage": {
@@ -557,9 +557,9 @@
         }
       }
     },
-    "f43791289a24db51cf18d0a41ee336996ceafb51018bf2d75b6699d55f7c81c3": {
-      "address": "0xfb72a5b79b8201c755a701496fc5dBE4bE5CBaAA",
-      "txHash": "0xbcd14b1f41ca741773480edd456d5891a17a746a3a8e37e9f5632c0019d19427",
+    "3b133a658a93d9ee36fd92b2e5d4f6d97cb491138867b4fbd9fbd9968c4c412e": {
+      "address": "0x62e687904EDDC668AbB02128875eA197aF7A5F8F",
+      "txHash": "0x6f46ec13a47206fb0317fa96fd3810e3bbb6703bdf8da3e65b86e774e6172fdd",
       "layout": {
         "storage": [
           {
@@ -699,9 +699,9 @@
         }
       }
     },
-    "777ec503009eb8d4bdc8ac7564d599bc2420f5844763bb4333aa673f32e2b3fb": {
-      "address": "0x141eD553561256BcAb2a6c1D4e5E6D47E3D9E6eb",
-      "txHash": "0x2dfaa6435582a1ce04694f468c15ad910b8571119a2e51053276d933dc5ad75d",
+    "f773fd94ea4b9d0a4ba871999058470a0a29ba656f79284a482c53375b1b7abe": {
+      "address": "0x51cc48255Cd11D3d89e587620B4fb5F63C9512Fb",
+      "txHash": "0xff05d8585b509e981312c81d12cc955ff198595126ce15b2fe2b8980b98cb556",
       "layout": {
         "storage": [
           {
@@ -809,25 +809,25 @@
           {
             "contract": "ClearingHouse",
             "label": "initMarginRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/ClearingHouse.sol:164"
           },
           {
             "contract": "ClearingHouse",
             "label": "maintenanceMarginRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/ClearingHouse.sol:167"
           },
           {
             "contract": "ClearingHouse",
             "label": "liquidationFeeRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/ClearingHouse.sol:170"
           },
           {
             "contract": "ClearingHouse",
             "label": "openInterestNotionalMap",
-            "type": "t_mapping(t_address,t_struct(decimal)25907_storage)",
+            "type": "t_mapping(t_address,t_struct(decimal)25935_storage)",
             "src": "src/ClearingHouse.sol:174"
           },
           {
@@ -839,19 +839,19 @@
           {
             "contract": "ClearingHouse",
             "label": "prepaidBadDebt",
-            "type": "t_mapping(t_address,t_struct(decimal)25907_storage)",
+            "type": "t_mapping(t_address,t_struct(decimal)25935_storage)",
             "src": "src/ClearingHouse.sol:180"
           },
           {
             "contract": "ClearingHouse",
             "label": "insuranceFund",
-            "type": "t_contract(IInsuranceFund)19235",
+            "type": "t_contract(IInsuranceFund)19263",
             "src": "src/ClearingHouse.sol:183"
           },
           {
             "contract": "ClearingHouse",
             "label": "feePool",
-            "type": "t_contract(IMultiTokenRewardRecipient)19271",
+            "type": "t_contract(IMultiTokenRewardRecipient)19299",
             "src": "src/ClearingHouse.sol:184"
           },
           {
@@ -869,7 +869,7 @@
           {
             "contract": "ClearingHouse",
             "label": "partialLiquidationRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/ClearingHouse.sol:197"
           }
         ],
@@ -877,7 +877,7 @@
           "t_string_storage": {
             "label": "string"
           },
-          "t_struct(decimal)25907_storage": {
+          "t_struct(decimal)25935_storage": {
             "label": "struct Decimal.decimal",
             "members": [
               {
@@ -889,7 +889,7 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_mapping(t_address,t_struct(decimal)25907_storage)": {
+          "t_mapping(t_address,t_struct(decimal)25935_storage)": {
             "label": "mapping(address => struct Decimal.decimal)"
           },
           "t_address": {
@@ -907,7 +907,7 @@
               },
               {
                 "label": "cumulativePremiumFractions",
-                "type": "t_array(t_struct(signedDecimal)27412_storage)dyn_storage"
+                "type": "t_array(t_struct(signedDecimal)27440_storage)dyn_storage"
               },
               {
                 "label": "positionMap",
@@ -915,10 +915,10 @@
               }
             ]
           },
-          "t_array(t_struct(signedDecimal)27412_storage)dyn_storage": {
+          "t_array(t_struct(signedDecimal)27440_storage)dyn_storage": {
             "label": "struct SignedDecimal.signedDecimal[]"
           },
-          "t_struct(signedDecimal)27412_storage": {
+          "t_struct(signedDecimal)27440_storage": {
             "label": "struct SignedDecimal.signedDecimal",
             "members": [
               {
@@ -935,19 +935,19 @@
             "members": [
               {
                 "label": "size",
-                "type": "t_struct(signedDecimal)27412_storage"
+                "type": "t_struct(signedDecimal)27440_storage"
               },
               {
                 "label": "margin",
-                "type": "t_struct(decimal)25907_storage"
+                "type": "t_struct(decimal)25935_storage"
               },
               {
                 "label": "openNotional",
-                "type": "t_struct(decimal)25907_storage"
+                "type": "t_struct(decimal)25935_storage"
               },
               {
                 "label": "lastUpdatedCumulativePremiumFraction",
-                "type": "t_struct(signedDecimal)27412_storage"
+                "type": "t_struct(signedDecimal)27440_storage"
               },
               {
                 "label": "liquidityHistoryIndex",
@@ -962,10 +962,10 @@
           "t_int256": {
             "label": "int256"
           },
-          "t_contract(IInsuranceFund)19235": {
+          "t_contract(IInsuranceFund)19263": {
             "label": "contract IInsuranceFund"
           },
-          "t_contract(IMultiTokenRewardRecipient)19271": {
+          "t_contract(IMultiTokenRewardRecipient)19299": {
             "label": "contract IMultiTokenRewardRecipient"
           },
           "t_array(t_uint256)50_storage": {
@@ -983,9 +983,9 @@
         }
       }
     },
-    "387d47cb1992ef465086dd6e7a3381dfc51c0038fd08fc1a6f9eb7808b46eba0": {
-      "address": "0xb7862F8573Ab7D5Be038A63d65a549ff01fC957F",
-      "txHash": "0xad7fc37e175424a6cfcee85f19a59e3bfccc697a2fc62e3e672e69182a7c7627",
+    "b028a24f0c9cfa85b8bbb3f8db8545bfe16f627df0112af3a07dc8bd759c2326": {
+      "address": "0xe1a6c995E031Cc8fc8ED3d7836183EC7336120de",
+      "txHash": "0xaf0e75a42a562fac57bbb4baebbfd5b145be9be73c82b4214dc9a8f458b19ae2",
       "layout": {
         "storage": [
           {
@@ -1039,97 +1039,97 @@
           {
             "contract": "Amm",
             "label": "baseAssetDeltaThisFundingPeriod",
-            "type": "t_struct(signedDecimal)27412_storage",
+            "type": "t_struct(signedDecimal)27440_storage",
             "src": "src/Amm.sol:97"
           },
           {
             "contract": "Amm",
             "label": "totalPositionSize",
-            "type": "t_struct(signedDecimal)27412_storage",
+            "type": "t_struct(signedDecimal)27440_storage",
             "src": "src/Amm.sol:100"
           },
           {
             "contract": "Amm",
             "label": "fundingRate",
-            "type": "t_struct(signedDecimal)27412_storage",
+            "type": "t_struct(signedDecimal)27440_storage",
             "src": "src/Amm.sol:103"
           },
           {
             "contract": "Amm",
             "label": "cumulativeNotional",
-            "type": "t_struct(signedDecimal)27412_storage",
+            "type": "t_struct(signedDecimal)27440_storage",
             "src": "src/Amm.sol:105"
           },
           {
             "contract": "Amm",
             "label": "settlementPrice",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:107"
           },
           {
             "contract": "Amm",
             "label": "tradeLimitRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:108"
           },
           {
             "contract": "Amm",
             "label": "quoteAssetReserve",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:109"
           },
           {
             "contract": "Amm",
             "label": "baseAssetReserve",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:110"
           },
           {
             "contract": "Amm",
             "label": "fluctuationLimitRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:111"
           },
           {
             "contract": "Amm",
             "label": "tollRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:114"
           },
           {
             "contract": "Amm",
             "label": "spreadRatio",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:115"
           },
           {
             "contract": "Amm",
             "label": "tollAmount",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:116"
           },
           {
             "contract": "Amm",
             "label": "maxHoldingBaseAsset",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:117"
           },
           {
             "contract": "Amm",
             "label": "openInterestNotionalCap",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:118"
           },
           {
             "contract": "Amm",
             "label": "cumulativePositionMultiplier",
-            "type": "t_struct(decimal)25907_storage",
+            "type": "t_struct(decimal)25935_storage",
             "src": "src/Amm.sol:121"
           },
           {
             "contract": "Amm",
             "label": "liquidityChangedSnapshots",
-            "type": "t_array(t_struct(LiquidityChangedSnapshot)18834_storage)dyn_storage",
+            "type": "t_array(t_struct(LiquidityChangedSnapshot)18862_storage)dyn_storage",
             "src": "src/Amm.sol:124"
           },
           {
@@ -1189,7 +1189,7 @@
           {
             "contract": "Amm",
             "label": "priceFeed",
-            "type": "t_contract(IPriceFeed)19336",
+            "type": "t_contract(IPriceFeed)19364",
             "src": "src/Amm.sol:136"
           },
           {
@@ -1206,7 +1206,7 @@
           }
         ],
         "types": {
-          "t_struct(signedDecimal)27412_storage": {
+          "t_struct(signedDecimal)27440_storage": {
             "label": "struct SignedDecimal.signedDecimal",
             "members": [
               {
@@ -1218,7 +1218,7 @@
           "t_int256": {
             "label": "int256"
           },
-          "t_struct(decimal)25907_storage": {
+          "t_struct(decimal)25935_storage": {
             "label": "struct Decimal.decimal",
             "members": [
               {
@@ -1230,27 +1230,27 @@
           "t_uint256": {
             "label": "uint256"
           },
-          "t_array(t_struct(LiquidityChangedSnapshot)18834_storage)dyn_storage": {
+          "t_array(t_struct(LiquidityChangedSnapshot)18862_storage)dyn_storage": {
             "label": "struct IAmm.LiquidityChangedSnapshot[]"
           },
-          "t_struct(LiquidityChangedSnapshot)18834_storage": {
+          "t_struct(LiquidityChangedSnapshot)18862_storage": {
             "label": "struct IAmm.LiquidityChangedSnapshot",
             "members": [
               {
                 "label": "cumulativeNotional",
-                "type": "t_struct(signedDecimal)27412_storage"
+                "type": "t_struct(signedDecimal)27440_storage"
               },
               {
                 "label": "quoteAssetReserve",
-                "type": "t_struct(decimal)25907_storage"
+                "type": "t_struct(decimal)25935_storage"
               },
               {
                 "label": "baseAssetReserve",
-                "type": "t_struct(decimal)25907_storage"
+                "type": "t_struct(decimal)25935_storage"
               },
               {
                 "label": "totalPositionSize",
-                "type": "t_struct(signedDecimal)27412_storage"
+                "type": "t_struct(signedDecimal)27440_storage"
               }
             ]
           },
@@ -1265,11 +1265,11 @@
             "members": [
               {
                 "label": "quoteAssetReserve",
-                "type": "t_struct(decimal)25907_storage"
+                "type": "t_struct(decimal)25935_storage"
               },
               {
                 "label": "baseAssetReserve",
-                "type": "t_struct(decimal)25907_storage"
+                "type": "t_struct(decimal)25935_storage"
               },
               {
                 "label": "timestamp",
@@ -1287,7 +1287,7 @@
           "t_contract(IERC20)2022": {
             "label": "contract IERC20"
           },
-          "t_contract(IPriceFeed)19336": {
+          "t_contract(IPriceFeed)19364": {
             "label": "contract IPriceFeed"
           },
           "t_bool": {
@@ -1300,8 +1300,8 @@
       }
     },
     "6313725d31f99a118012b082ddedfdaae5cdc5db6b87bad272fbc852be49442d": {
-      "address": "0x86fFb2976800c56f7e8E916a26C06e97AFab421A",
-      "txHash": "0x40c1c74e80591579ad81f3b5dc2d7ceb635ae4b88494b3670aef2f913924a1ee",
+      "address": "0xc2d7C7B10b76cD239947A4Db177EA91812ffd431",
+      "txHash": "0x290f8fe3cd9594124b5b73ca75a9bb31bc3f0e63d11779f0131b2fbb074eec87",
       "layout": {
         "storage": [
           {
@@ -1367,7 +1367,7 @@
           {
             "contract": "ChainlinkL1",
             "label": "rootBridge",
-            "type": "t_contract(RootBridge)16721",
+            "type": "t_contract(RootBridge)16749",
             "src": "src/ChainlinkL1.sol:29"
           },
           {
@@ -1402,7 +1402,7 @@
           "t_array(t_bytes32)dyn_storage": {
             "label": "bytes32[]"
           },
-          "t_contract(RootBridge)16721": {
+          "t_contract(RootBridge)16749": {
             "label": "contract RootBridge"
           },
           "t_address": {
@@ -1425,7 +1425,7 @@
     }
   },
   "admin": {
-    "address": "0x9b35fF69950239e20Bc4c88E925f681645BDc3cD",
-    "txHash": "0x7b2664db9e52fcd825dd4c901b114eb4e2884d071c7799aad5f8702036e74f61"
+    "address": "0x370DfCcF948082aDa4bcAfD2A84bDCda4f163415",
+    "txHash": "0x3ce7df6026f4af88b3ed9f708cc205b1d002ec9e9c1c65ce2c44dc70065ce6f6"
   }
 }
