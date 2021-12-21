@@ -49,7 +49,7 @@
         "ambBridgeOnEth": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "multiTokenMediatorOnEth": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
         "tether": "0xe70b02a5ae129f66687256b7a5e81cc871e347d7",
-        "usdc": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+        "usdc": "0x64544969ed7ebf5f083679233325356ebe738930"
       }
     },
     "layer2": {
@@ -149,7 +149,7 @@
         "ambBridgeOnXDai": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "multiTokenMediatorOnXDai": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
         "tether": "0xe70b02a5ae129f66687256b7a5e81cc871e347d7",
-        "usdc": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd"
+        "usdc": "0x64544969ed7ebf5f083679233325356ebe738930"
       }
     }
   }
