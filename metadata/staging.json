@@ -4,11 +4,11 @@
       "contracts": {
         "RootBridge": {
           "name": "RootBridge",
-          "address": "0xBD7651eC070dac3D9DFA189433792a67805F68dF"
+          "address": "0xc0345814289Fe8583D3fe469AD6374D29e0601db"
         },
         "ChainlinkL1": {
           "name": "ChainlinkL1",
-          "address": "0x286f48de1628D617a878fF8B9646A547543F9870"
+          "address": "0x636D27e464Add056c460320FD333aAaBa4A0ab3A"
         }
       },
       "accounts": [],
@@ -17,8 +17,8 @@
         "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
         "rewardGovernance": "0x7cd11681690d25DAA202550E1B3F314C74A0Acd6",
         "perp": "0x0078371BDeDE8aAc7DeBfFf451B74c5EDB385Af7",
-        "tether": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
-        "usdc": "0x64544969ed7ebf5f083679233325356ebe738930",
+        "tether": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2",
+        "usdc": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2",
         "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
         "ambBridgeOnEth": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "multiTokenMediatorOnEth": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB"
@@ -28,39 +28,39 @@
       "contracts": {
         "MetaTxGateway": {
           "name": "MetaTxGateway",
-          "address": "0x64DBB67251D832094B649A3800786A1Ae75a9004"
+          "address": "0xeF5f8F4c40B5ED67CC98259B2Fa2CB2F38bD74e9"
         },
         "ClientBridge": {
           "name": "ClientBridge",
-          "address": "0x85D5B2211daC7e77c917bdb5eBd3b8f7e3C01422"
+          "address": "0xB664326DB6f040CED2ccd04BE50A640F211FaF3c"
         },
         "InsuranceFund": {
           "name": "InsuranceFund",
-          "address": "0xAbbDB786e3186584A9Ad7083edaC4dBB5de08293"
+          "address": "0x3c8eA07425430D443C8CF03d85e5c1787b11b419"
         },
         "L2PriceFeed": {
           "name": "L2PriceFeed",
-          "address": "0x5922Cd504289EF863a777F5a043757C1Efa26A12"
+          "address": "0xAD72cdA5aEC531Aa021a61456909afaC7A10410D"
         },
         "ClearingHouse": {
           "name": "ClearingHouse",
-          "address": "0x2126152845653F772E11f8C3556d7c0E995d3F9a"
+          "address": "0x9200FFC635FdA55dc69E585F378DBa94Fbd25898"
         },
         "ETHUSDC": {
           "name": "Amm",
-          "address": "0x00f8BE90a0CdE2CCEBd311c57fbb35cCB2ea5c4D"
+          "address": "0x60c3880229C4Cd8bB612C622F5Be95d3e457289f"
         },
         "BTCUSDC": {
           "name": "Amm",
-          "address": "0x24CC98Edd70B87C1321aE2a9e154428eF6af8D5a"
+          "address": "0x143Ab9244Cd869B0B365b31669Eb5CBf2D01a080"
         },
         "ClearingHouseViewer": {
           "name": "ClearingHouseViewer",
-          "address": "0xce5E3F397A9FDE578c5100AD1BB00A6aeDB107b3"
+          "address": "0xF145Be608333f9C600761D3e902477534B53739C"
         },
         "AmmReader": {
           "name": "AmmReader",
-          "address": "0xdAc1C8CB839Be8eF5Ee8ce4c1e8B46391B33Bdf7"
+          "address": "0xcA440F8f66C79A7A3d7D020A87ec5e2df5d8E529"
         }
       },
       "accounts": [],
@@ -71,8 +71,8 @@
         "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
         "ambBridgeOnXDai": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "multiTokenMediatorOnXDai": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
-        "tether": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
-        "usdc": "0x64544969ed7ebf5f083679233325356ebe738930"
+        "tether": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2",
+        "usdc": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2"
       }
     }
   }

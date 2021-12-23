@@ -7,8 +7,8 @@
         "foundationGovernance": "0xa230A4f6F38D904C2eA1eE95d8b2b8b7350e3d79",
         "rewardGovernance": "0x7cd11681690d25DAA202550E1B3F314C74A0Acd6",
         "perp": "0x0078371BDeDE8aAc7DeBfFf451B74c5EDB385Af7",
-        "tether": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
-        "usdc": "0xaa25Aa7a19f9c426E07dee59b12f944f4d9f1DD3",
+        "tether": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2",
+        "usdc": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2",
         "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
         "ambBridgeOnEth": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "multiTokenMediatorOnEth": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB"
@@ -23,8 +23,8 @@
         "testnetFaucet": "0x9E9DFaCCABeEcDA6dD913b3685c9fe908F28F58c",
         "ambBridgeOnXDai": "0xD4075FB57fCf038bFc702c915Ef9592534bED5c1",
         "multiTokenMediatorOnXDai": "0x30F693708fc604A57F1958E3CFa059F902e6d4CB",
-        "tether": "0x337610d27c682E347C9cD60BD4b3b107C9d34dDd",
-        "usdc": "0xaa25Aa7a19f9c426E07dee59b12f944f4d9f1DD3"
+        "tether": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2",
+        "usdc": "0xF443325952Dd595A6a8B12F10e987cC4a5d10FB2"
       }
     }
   },
