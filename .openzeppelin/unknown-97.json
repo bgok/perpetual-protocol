@@ -2,8 +2,8 @@
   "manifestVersion": "3.1",
   "impls": {
     "523da93e0936c442409ebc9cc4dd87f6b202cdd9d7bb15d9d9eb1d42867ee032": {
-      "address": "0x5e911bcBCb5936eA5b8a2a42936166f1343B9C20",
-      "txHash": "0x10197956d40d989255b867a76112014ce7233ac47e03f1b655dbe0bd3c109a0a",
+      "address": "0x4C81DDF9830E3ee3A3be167A5c2C374E78c7548A",
+      "txHash": "0xdc52d6186da048eb0efb1316b73d8fc2b4cea951fc9b324497f27e7771ee7fa0",
       "layout": {
         "storage": [
           {
@@ -120,8 +120,8 @@
       }
     },
     "8f6af920f26cf0083a191c46e0b72f6b1ce5aa2736f2059a17b1770fc0012c69": {
-      "address": "0x31e944210F3fa5bD6A4e06b3284C1D13B387f8dE",
-      "txHash": "0x72aea9468607fc04accd791ea719a96a1d69ed2a1876ea0d061cdeee8a7b836e",
+      "address": "0xAC08cB3b92dF9d8e776B54CC9884866825Ed80D9",
+      "txHash": "0x58f5a8e03fc569f15f5ad28a5fa754f2f7f59c9e7f89205a5e807188cc844705",
       "layout": {
         "storage": [
           {
@@ -229,8 +229,8 @@
       }
     },
     "6bbad8da3cc85f2a9bc956af9a0bf15303c97f6ad81ba9e659275b77b023f3cf": {
-      "address": "0x5a46034F3d27A997dc5A1fEEBa5C2EDbcFC72B5F",
-      "txHash": "0x8d015b6f9653b71d6fc02896711080d042182f0f2978d50e605c69035b9042b8",
+      "address": "0x50493BA78faC3dAa5Bed06f89394b9cCe3584fa4",
+      "txHash": "0xe642ad7136dce609adb26d3591579ef5d6645ab87f7709a40fe4e51d9751974f",
       "layout": {
         "storage": [
           {
@@ -374,8 +374,8 @@
       }
     },
     "69642985c6424333d58748cdd14fcae5e4377ddcf02a39a0754cbc6661152296": {
-      "address": "0xdbF375E93073f944c2C429B5252Fa9E5bC5BE3E9",
-      "txHash": "0x559c3976bae5aef3a4d2c66d179ac980b77b7827f20c0c7ff734c8c363e37798",
+      "address": "0x1171dc7DF56a91c9B796292ECf8C25d97CE6DaAf",
+      "txHash": "0x8b6bdf4d51cbd9d7524301147b4288042a21cbd5d7a63368ba27db2a6e026712",
       "layout": {
         "storage": [
           {
@@ -558,8 +558,8 @@
       }
     },
     "3b133a658a93d9ee36fd92b2e5d4f6d97cb491138867b4fbd9fbd9968c4c412e": {
-      "address": "0x62e687904EDDC668AbB02128875eA197aF7A5F8F",
-      "txHash": "0x6f46ec13a47206fb0317fa96fd3810e3bbb6703bdf8da3e65b86e774e6172fdd",
+      "address": "0x69577BA8F7243546e9681c3599D7B9aa2AF7eCE1",
+      "txHash": "0xa8a83b516b27b7443dbe6eb579a60573512b8d709e40e2522ed3f6247d7710b5",
       "layout": {
         "storage": [
           {
@@ -700,8 +700,8 @@
       }
     },
     "f773fd94ea4b9d0a4ba871999058470a0a29ba656f79284a482c53375b1b7abe": {
-      "address": "0x51cc48255Cd11D3d89e587620B4fb5F63C9512Fb",
-      "txHash": "0xff05d8585b509e981312c81d12cc955ff198595126ce15b2fe2b8980b98cb556",
+      "address": "0x2ecb2D282C2C824b8E4ecC4F334B11369287F99e",
+      "txHash": "0xe0a20e38bf0b4fdc291b75ad86eefcaeb13c1da55ab08c2611d7ca45f764d893",
       "layout": {
         "storage": [
           {
@@ -984,8 +984,8 @@
       }
     },
     "b028a24f0c9cfa85b8bbb3f8db8545bfe16f627df0112af3a07dc8bd759c2326": {
-      "address": "0xe1a6c995E031Cc8fc8ED3d7836183EC7336120de",
-      "txHash": "0xaf0e75a42a562fac57bbb4baebbfd5b145be9be73c82b4214dc9a8f458b19ae2",
+      "address": "0x2672546CD370fBd42Da166E19E23acB2E5F4FE38",
+      "txHash": "0x7999025f9415debe0792a6d62476337c0b39ece15c729be8c0c7ce8249ab6444",
       "layout": {
         "storage": [
           {
@@ -1300,8 +1300,8 @@
       }
     },
     "6313725d31f99a118012b082ddedfdaae5cdc5db6b87bad272fbc852be49442d": {
-      "address": "0xc2d7C7B10b76cD239947A4Db177EA91812ffd431",
-      "txHash": "0x290f8fe3cd9594124b5b73ca75a9bb31bc3f0e63d11779f0131b2fbb074eec87",
+      "address": "0x72Da66F0A4bcC4041fFb553615b7af98D83a582b",
+      "txHash": "0x1c1cf67cf58379eaaa8f92d5a7f9f7fa5e9d4388bac98b25980cdb369e70c22b",
       "layout": {
         "storage": [
           {
@@ -1425,7 +1425,7 @@
     }
   },
   "admin": {
-    "address": "0x370DfCcF948082aDa4bcAfD2A84bDCda4f163415",
-    "txHash": "0x3ce7df6026f4af88b3ed9f708cc205b1d002ec9e9c1c65ce2c44dc70065ce6f6"
+    "address": "0xb7914b9F58E4B9B1A6Db681FfD72806a4798Ca6A",
+    "txHash": "0x082a45e3f2851a535c024161326b6b3da92c0d6007b067ebcb0b682c981c84da"
   }
 }

@@ -14,6 +14,7 @@ import {
     ARTIFACTS_DIR,
     COVERAGE_URL,
     ETHERSCAN_API_KEY,
+    GAS,
     GAS_PRICE,
     HOMESTEAD_MNEMONIC,
     HOMESTEAD_URL,
@@ -33,7 +34,7 @@ import {
     XDAI_MNEMONIC,
     XDAI_URL,
 } from "./constants"
-import { TASK_CHECK_CHAINLINK, TASK_MIGRATE, TASK_SIMULATE } from "./scripts/common"
+import { TASK_CHECK_CHAINLINK, TASK_MIGRATE, TASK_PING_PRICE_UPDATE, TASK_SIMULATE } from "./scripts/common"
 
 task(TASK_CHECK_CHAINLINK, "Check Chainlink")
     .addParam("address", "a Chainlink aggregator address")
@@ -79,6 +80,14 @@ task(TASK_MIGRATE, "Migrate contract deployment")
 
         await hre.run(TASK_COMPILE)
         await migrate(stage, migrationPath, hre)
+    })
+
+task(TASK_PING_PRICE_UPDATE, "call the price update endpoint using update-price-from-feed")
+    .addPositionalParam("stage", "Target stage of the deployment")
+    .setAction(async ({ stage }, hre) => {
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
+        const { updatePriceFromFeed } = require("./publish/update-price-from-feed")
+        await updatePriceFromFeed(hre)
     })
 
 const config: HardhatUserConfig = {
@@ -133,10 +142,12 @@ const config: HardhatUserConfig = {
         },
         tbsc: {
             url: TBSC_URL,
+            gas: GAS,
             gasPrice: TBSC_GAS_PRICE,
             accounts: {
                 mnemonic: TBSC_MNEMONIC,
             },
+            chainId: 97,
         },
     },
     solidity: {

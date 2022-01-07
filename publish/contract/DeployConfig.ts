@@ -310,11 +310,10 @@ export class DeployConfig {
             case "staging":
                 this.confirmations = 5
                 this.chainlinkMap = {
-                    [PriceFeedKey.BTC]: "0xECe365B379E1dD183B20fc5f022230C044d51404",
-                    [PriceFeedKey.ETH]: "0x8A753747A1Fa494EC906cE90E9f37563A8AF630e",
-                    [PriceFeedKey.YFI]: "0xA027702dbb89fbd58938e4324ac03B58d812b0E1", // WARNING: there is no YFI/USD PriceFeed at Rinkeby
-                    [PriceFeedKey.DOT]: "0x1C07AFb8E2B827c5A4739C6d59Ae3A5035f28734", // WARNING: there is no YFI/USD PriceFeed at Rinkeby
-                    [PriceFeedKey.SDEFI]: "0x0630521aC362bc7A19a4eE44b57cE72Ea34AD01c",
+                    [PriceFeedKey.BTC]: "0x5741306c21795FdCBb9b265Ea0255F499DFe515C",
+                    [PriceFeedKey.ETH]: "0x143db3CEEfbdfe5631aDD3E50f7614B6ba708BA7",
+                    [PriceFeedKey.DOT]: "0xC333eb0086309a16aa7c8308DfD32c8BBA0a2592",
+                    // There is no YFI/USD, SDEFI/USD, or SNX/USD Feed on tBSC
                 }
                 break
             case "test":
