@@ -1,13 +1,12 @@
 import { Fragment, JsonFragment } from "@ethersproject/abi"
 import { Contract, ethers, utils } from "ethers"
 import { artifacts } from "hardhat"
-import fetch from "node-fetch"
 import { ContractFullyQualifiedName } from "../publish/ContractName"
 import { Amm, ClearingHouse, ERC20, InsuranceFund } from "../types/ethers"
 
 // TODO move to another standalone repo with SystemTest
 
-const USDC_DECIMALS = 6
+const USDC_DECIMALS = 18 // TODO get this from a config file or ask the USDC contract
 const provider = new ethers.providers.JsonRpcProvider("https://rpc.xdaichain.com/")
 
 // string | Array<Fragment | JsonFragment | string> | Interface;
@@ -16,10 +15,11 @@ function instance(address: string, abi: Array<string | Fragment | JsonFragment>)
 }
 
 async function healthCheck(): Promise<void> {
-    const results = await fetch(`https://metadata.perp.exchange/production.json`)
-    const json = await results.json()
+    const results = await require("../metadata/staging.json")
+    const json = results
+    const layer1 = json["layers"]["layer1"]
     const layer2 = json["layers"]["layer2"]
-    const chainlinkPriceFeedAddr = layer2.contracts.ChainlinkPriceFeed.address
+    const chainlinkPriceFeedAddr = layer1.contracts.ChainlinkPriceFeed.address
     const layer2PriceFeedAddr = layer2.contracts.L2PriceFeed.address
 
     const AmmArtifact = await artifacts.readArtifact(ContractFullyQualifiedName.Amm)

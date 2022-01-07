@@ -1,5 +1,6 @@
 import dotenv from "dotenv"
 import { join, resolve } from "path"
+
 dotenv.config({ path: resolve(__dirname, "..", "..", ".env") })
 
 export const ROOT_DIR = __dirname
@@ -29,7 +30,7 @@ export const TBSC_URL = "https://data-seed-prebsc-1-s1.binance.org:8545/"
 export const TBSC_MNEMONIC = "exchange employ enroll misery across pretty asthma bone air since together venue"
 export const TBSC_GAS_PRICE = 20_000_000_000
 export const ARTIFACTS_DIR = "./build/contracts"
-export const GAS = 8000000
+export const GAS = 8_000_000
 export const GAS_PRICE = 2_000_000_000
 export const SRC_DIR = join(ROOT_DIR, SRC_DIR_NAME)
 export const LEGACY_SRC_DIR = join(ROOT_DIR, LEGACY_SRC_DIR_NAME)

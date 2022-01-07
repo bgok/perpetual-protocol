@@ -97,3 +97,4 @@ export interface SystemDeploySettings {
 export const TASK_CHECK_CHAINLINK = "check:chainlink"
 export const TASK_MIGRATE = "migrate"
 export const TASK_SIMULATE = "simulate"
+export const TASK_PING_PRICE_UPDATE = "update:chainlink"
