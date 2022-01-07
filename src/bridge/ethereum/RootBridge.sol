@@ -32,24 +32,24 @@ contract RootBridge is BaseBridge {
         __BaseBridge_init(_ambBridge, _multiTokenMediator);
     }
 
-    function updatePriceFeed(
-        address _priceFeedAddrOnL2,
-        bytes32 _priceFeedKey,
-        Decimal.decimal calldata _price,
-        uint256 _timestamp,
-        uint256 _roundId
-    ) external returns (bytes32 messageId) {
-        require(address(priceFeed) == _msgSender(), "!priceFeed");
-
-        bytes4 methodSelector = IPriceFeed.setLatestData.selector;
-        bytes memory data =
-            abi.encodeWithSelector(methodSelector, _priceFeedKey, _price.toUint(), _timestamp, _roundId);
-        return callBridge(_priceFeedAddrOnL2, data, DEFAULT_GAS_LIMIT);
-    }
-
-    function setPriceFeed(address _priceFeed) external onlyOwner {
-        priceFeed = IPriceFeed(_priceFeed);
-    }
+    ////    function updatePriceFeed(
+    ////        address _priceFeedAddrOnL2,
+    ////        bytes32 _priceFeedKey,
+    ////        Decimal.decimal calldata _price,
+    ////        uint256 _timestamp,
+    ////        uint256 _roundId
+    ////    ) external returns (bytes32 messageId) {
+    ////        require(address(priceFeed) == _msgSender(), "!priceFeed");
+    ////
+    ////        bytes4 methodSelector = IPriceFeed.setLatestData.selector;
+    ////        bytes memory data =
+    ////            abi.encodeWithSelector(methodSelector, _priceFeedKey, _price.toUint(), _timestamp, _roundId);
+    ////        return callBridge(_priceFeedAddrOnL2, data, DEFAULT_GAS_LIMIT);
+    ////    }
+    ////
+    //    function setPriceFeed(address _priceFeed) external onlyOwner {
+    //        priceFeed = IPriceFeed(_priceFeed);
+    //    }
 
     //
     // INTERNALS
