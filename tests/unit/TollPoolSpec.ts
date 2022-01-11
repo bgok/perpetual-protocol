@@ -3,13 +3,7 @@ import { expectEvent, expectRevert } from "@openzeppelin/test-helpers"
 import { use } from "chai"
 import { ERC20FakeInstance, MultiTokenMediatorMockInstance, TollPoolInstance } from "../../types/truffle"
 import { assertionHelper } from "../helper/assertion-plugin"
-import {
-    deployClientBridge,
-    deployErc20Fake,
-    deployMockAMBBridge,
-    deployMockMultiToken,
-    deployTollPool,
-} from "../helper/contract"
+import { deployErc20Fake, deployMockMultiToken, deployTollPool } from "../helper/contract"
 import { toFullDigit } from "../helper/number"
 
 use(assertionHelper)
@@ -35,10 +29,8 @@ describe("tollPoolSpec", () => {
         usdc = await deployErc20Fake(toFullDigit(2000000))
 
         tokenMediator = await deployMockMultiToken()
-        const ambBridge = await deployMockAMBBridge()
-        const clientBridge = await deployClientBridge(ambBridge.address, tokenMediator.address, admin)
 
-        tollPool = await deployTollPool(admin, clientBridge.address)
+        tollPool = await deployTollPool(admin)
 
         await usdt.approve(tollPool.address, toFullDigit(2000000))
         await usdc.approve(tollPool.address, toFullDigit(2000000))
@@ -57,7 +49,7 @@ describe("tollPoolSpec", () => {
             await usdt.transfer(tollPool.address, toFullDigit(1000))
             const receipt = await tollPool.transferToFeeTokenPoolDispatcher({ from: admin })
             expectEvent.inTransaction(receipt.tx, tollPool, "TokenTransferred")
-            expect(await usdt.balanceOf(tokenMediator.address)).to.eq(toFullDigit(1000))
+            expect(await usdt.balanceOf(feeTokenPoolDispatcherMock)).to.eq(toFullDigit(1000))
         })
 
         it("should receive all the balances of tokens in the tollPool contract", async () => {
@@ -77,8 +69,8 @@ describe("tollPoolSpec", () => {
             //     token: usdc.address,
             //     amount: toFullDigit(2000),
             // })
-            expect(await usdt.balanceOf(tokenMediator.address)).to.eq(toFullDigit(1000))
-            expect(await usdc.balanceOf(tokenMediator.address)).to.eq(toFullDigit(2000))
+            expect(await usdt.balanceOf(feeTokenPoolDispatcherMock)).to.eq(toFullDigit(1000))
+            expect(await usdc.balanceOf(feeTokenPoolDispatcherMock)).to.eq(toFullDigit(2000))
         })
 
         it("should receive usdt but not usdc, since the balance of usdc is 0", async () => {
@@ -88,7 +80,7 @@ describe("tollPoolSpec", () => {
 
             await usdt.transfer(tollPool.address, toFullDigit(1000))
             await tollPool.transferToFeeTokenPoolDispatcher({ from: admin })
-            expect(await usdt.balanceOf(tokenMediator.address)).to.eq(toFullDigit(1000))
+            expect(await usdt.balanceOf(feeTokenPoolDispatcherMock)).to.eq(toFullDigit(1000))
         })
 
         it("force error, feeTokenPoolDispatcherL1 not yet set", async () => {
