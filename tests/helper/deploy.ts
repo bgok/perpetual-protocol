@@ -4,7 +4,6 @@ import {
     AmmReaderInstance,
     ClearingHouseFakeInstance,
     ClearingHouseViewerInstance,
-    ClientBridgeInstance,
     ERC20FakeInstance,
     ExchangeWrapperMockInstance,
     InflationMonitorFakeInstance,
@@ -23,16 +22,13 @@ import {
     deployAmmReader,
     deployClearingHouse,
     deployClearingHouseViewer,
-    deployClientBridge,
     deployErc20Fake,
     deployInflationMonitor,
     deployInsuranceFund,
     deployL2MockPriceFeed,
     deployMetaTxGateway,
     deployMinter,
-    deployMockAMBBridge,
     deployMockExchangeWrapper,
-    deployMockMultiToken,
     deployPerpToken,
     deployRewardsDistribution,
     deployStakingReserve,
@@ -58,7 +54,6 @@ export interface PerpContracts {
     inflationMonitor: InflationMonitorFakeInstance
     minter: MinterInstance
     tollPool: TollPoolInstance
-    clientBridge: ClientBridgeInstance
 }
 
 export interface ContractDeployArgs {
@@ -147,11 +142,7 @@ export async function fullDeploy(args: ContractDeployArgs): Promise<PerpContract
         perpRewardVestingPeriod!,
     )
 
-    const ambBridge = await deployMockAMBBridge()
-    const tokenMediator = await deployMockMultiToken()
-    const clientBridge = await deployClientBridge(ambBridge.address, tokenMediator.address, metaTxGateway.address)
-
-    const tollPool = await deployTollPool(clearingHouse.address, clientBridge.address)
+    const tollPool = await deployTollPool(clearingHouse.address)
 
     await clearingHouse.setTollPool(tollPool.address)
 
@@ -209,6 +200,5 @@ export async function fullDeploy(args: ContractDeployArgs): Promise<PerpContract
         inflationMonitor,
         minter,
         tollPool,
-        clientBridge,
     }
 }

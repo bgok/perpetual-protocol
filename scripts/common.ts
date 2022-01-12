@@ -59,10 +59,6 @@ export interface ExternalContracts {
     arbitrageur?: string
     testnetFaucet?: string
 
-    // https://docs.tokenbridge.net/eth-xdai-amb-bridge/about-the-eth-xdai-amb
-    ambBridgeOnXDai?: string
-    ambBridgeOnEth?: string
-
     // https://docs.tokenbridge.net/eth-xdai-amb-bridge/multi-token-extension#omnibridge-technical-information-and-extension-parameters
     multiTokenMediatorOnXDai?: string
     multiTokenMediatorOnEth?: string
