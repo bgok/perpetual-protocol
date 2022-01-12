@@ -5,8 +5,10 @@ pragma experimental ABIEncoderV2;
 import { AggregatorV3Interface } from "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
 import { BlockContext } from "./utils/BlockContext.sol";
 import { PerpFiOwnableUpgrade } from "./utils/PerpFiOwnableUpgrade.sol";
-import { RootBridge } from "./bridge/ethereum/RootBridge.sol";
 import { Decimal, SafeMath } from "./utils/Decimal.sol";
+import "./interface/IPriceFeed.sol";
+
+import "hardhat/console.sol";
 
 contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     using SafeMath for uint256;
@@ -14,9 +16,7 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
 
     uint256 private constant TOKEN_DIGIT = 10**18;
 
-    event RootBridgeChanged(address rootBridge);
     event PriceFeedL2Changed(address priceFeedL2);
-    event PriceUpdateMessageIdSent(bytes32 messageId);
     event PriceUpdated(uint80 roundId, uint256 price, uint256 timestamp);
 
     //**********************************************************//
@@ -26,8 +26,7 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     // key by currency symbol, eg ETH
     mapping(bytes32 => AggregatorV3Interface) public priceFeedMap;
     bytes32[] public priceFeedKeys;
-    RootBridge public rootBridge;
-    address public priceFeedL2Address;
+    IPriceFeed public priceFeedL2;
     mapping(bytes32 => uint256) public prevTimestampMap;
 
     //**********************************************************//
@@ -42,22 +41,15 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     //
     // FUNCTIONS
     //
-    function initialize(address _rootBridge, address _priceFeedL2) public initializer {
+    function initialize(IPriceFeed _priceFeedL2) public initializer {
         __Ownable_init();
-        setRootBridge(_rootBridge);
         setPriceFeedL2(_priceFeedL2);
     }
 
-    function setRootBridge(address _rootBridge) public onlyOwner {
-        requireNonEmptyAddress(_rootBridge);
-        rootBridge = RootBridge(_rootBridge);
-        emit RootBridgeChanged(_rootBridge);
-    }
-
-    function setPriceFeedL2(address _priceFeedL2) public onlyOwner {
-        requireNonEmptyAddress(_priceFeedL2);
-        priceFeedL2Address = _priceFeedL2;
-        emit PriceFeedL2Changed(_priceFeedL2);
+    function setPriceFeedL2(IPriceFeed _priceFeedL2) public onlyOwner {
+        requireNonEmptyAddress(address(_priceFeedL2));
+        priceFeedL2 = _priceFeedL2;
+        emit PriceFeedL2Changed(address(_priceFeedL2));
     }
 
     function addAggregator(bytes32 _priceFeedKey, address _aggregator) external onlyOwner {
@@ -104,9 +96,7 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
         uint8 decimals = aggregator.decimals();
 
         Decimal.decimal memory decimalPrice = Decimal.decimal(formatDecimals(uint256(price), decimals));
-        bytes32 messageId =
-            rootBridge.updatePriceFeed(priceFeedL2Address, _priceFeedKey, decimalPrice, timestamp, roundId);
-        emit PriceUpdateMessageIdSent(messageId);
+        priceFeedL2.setLatestData(_priceFeedKey, uint256(price), timestamp, roundId);
         emit PriceUpdated(roundId, decimalPrice.toUint(), timestamp);
 
         prevTimestampMap[_priceFeedKey] = timestamp;
