@@ -4,9 +4,9 @@ import { ethers } from "ethers"
 import { Layer } from "../../scripts/common"
 import {
     AmmReader,
+    ChainlinkL1,
     ClearingHouse,
     ClearingHouseViewer,
-    ClientBridge,
     InsuranceFund,
     L2PriceFeed,
     MetaTxGateway,
@@ -26,17 +26,6 @@ const migration: MigrationDefinition = {
                 .deployUpgradableContract("Perp", "1", chainId)
         },
         async (): Promise<void> => {
-            console.log("deploy clientBridge...")
-            const ambBridgeOnXDai = context.externalContract.ambBridgeOnXDai!
-            const multiTokenMediatorOnXDai = context.externalContract.multiTokenMediatorOnXDai!
-            const metaTxGatewayContract = context.factory.create<MetaTxGateway>(
-                ContractFullyQualifiedName.MetaTxGateway,
-            )
-            await context.factory
-                .create<ClientBridge>(ContractFullyQualifiedName.ClientBridge)
-                .deployUpgradableContract(ambBridgeOnXDai, multiTokenMediatorOnXDai, metaTxGatewayContract.address!)
-        },
-        async (): Promise<void> => {
             console.log("deploy insuranceFund...")
             await context.factory
                 .create<InsuranceFund>(ContractFullyQualifiedName.InsuranceFund)
@@ -44,14 +33,21 @@ const migration: MigrationDefinition = {
         },
         async (): Promise<void> => {
             console.log("deploy L2PriceFeed")
-            const ambBridgeOnXDaiAddr = context.externalContract.ambBridgeOnXDai!
-            const rootBridgeOnEthAddr = context.systemMetadataDao.getContractMetadata(
-                Layer.Layer1,
-                ContractName.RootBridge,
-            ).address
+            const chainlinkAddr = context.factory.create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1).address
             await context.factory
                 .create<L2PriceFeed>(ContractFullyQualifiedName.L2PriceFeed)
-                .deployUpgradableContract(ambBridgeOnXDaiAddr, rootBridgeOnEthAddr)
+                .deployUpgradableContract(chainlinkAddr!)
+        },
+        async (): Promise<void> => {
+            console.log("set L2PriceFeed in ChainlinkL1")
+            const l2PriceFeedAddr = context.systemMetadataDao.getContractMetadata(
+                Layer.Layer1,
+                ContractName.L2PriceFeed,
+            ).address
+            const chainlinkL1 = await context.factory
+                .create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
+                .instance()
+            await (await chainlinkL1.setPriceFeedL2(l2PriceFeedAddr)).wait()
         },
         async (): Promise<void> => {
             console.log("deploy clearing house...")
@@ -134,17 +130,6 @@ const migration: MigrationDefinition = {
             console.log("deploy ammReader...")
             const ammReaderContract = context.factory.create<AmmReader>(ContractFullyQualifiedName.AmmReader)
             await ammReaderContract.deployImmutableContract()
-        },
-        async (): Promise<void> => {
-            console.log("metaTxGateway add clientBridge to whitelist...")
-            const metaTxGatewayContract = context.factory.create<MetaTxGateway>(
-                ContractFullyQualifiedName.MetaTxGateway,
-            )
-            const metaTxGateway = await metaTxGatewayContract.instance()
-            const clientBridgeContract = context.factory.create<ClientBridge>(ContractFullyQualifiedName.ClientBridge)
-            await (await metaTxGateway.addToWhitelists(clientBridgeContract.address!)).wait(
-                context.deployConfig.confirmations,
-            )
         },
         async (): Promise<void> => {
             console.log("add ETH aggregators to L2PriceFeed")
@@ -230,17 +215,17 @@ const migration: MigrationDefinition = {
             const insuranceFund = await insuranceFundContract.instance()
             await (await insuranceFund.addAmm(ammContract.address!)).wait(context.deployConfig.confirmations)
         },
-        async (): Promise<void> => {
-            console.log("l2priceFeed setRootBridge...")
-            const l2PriceFeed = await context.factory
-                .create<L2PriceFeed>(ContractFullyQualifiedName.L2PriceFeed)
-                .instance()
-            await (
-                await l2PriceFeed!.setRootBridge(
-                    context.systemMetadataDao.getContractMetadata(Layer.Layer1, ContractName.RootBridge).address,
-                )
-            ).wait(context.deployConfig.confirmations)
-        },
+        // async (): Promise<void> => {
+        //     console.log("l2priceFeed setChainlink...")
+        //     const l2PriceFeed = await context.factory
+        //         .create<L2PriceFeed>(ContractFullyQualifiedName.L2PriceFeed)
+        //         .instance()
+        //     await (
+        //         await l2PriceFeed!.setChainlink(
+        //             context.systemMetadataDao.getContractMetadata(Layer.Layer1, ContractName.ChainlinkL1).address,
+        //         )
+        //     ).wait(context.deployConfig.confirmations)
+        // },
         async (): Promise<void> => {
             console.log("opening Amm ETHUSDC...")
             const ethUsdc = await context.factory
@@ -264,16 +249,6 @@ const migration: MigrationDefinition = {
                 .create<MetaTxGateway>(ContractFullyQualifiedName.MetaTxGateway)
                 .instance()
             await (await metaTxGateway.setOwner(gov)).wait(context.deployConfig.confirmations)
-        },
-        async (): Promise<void> => {
-            const gov = context.externalContract.foundationGovernance!
-            console.log(
-                `transferring clientBridge's owner to governance=${gov}...please remember to claim the ownership`,
-            )
-            const clientBridge = await context.factory
-                .create<ClientBridge>(ContractFullyQualifiedName.ClientBridge)
-                .instance()
-            await (await clientBridge.setOwner(gov)).wait(context.deployConfig.confirmations)
         },
         async (): Promise<void> => {
             const gov = context.externalContract.foundationGovernance!

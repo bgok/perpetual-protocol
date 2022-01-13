@@ -41,9 +41,8 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     //
     // FUNCTIONS
     //
-    function initialize(IPriceFeed _priceFeedL2) public initializer {
+    function initialize() public initializer {
         __Ownable_init();
-        setPriceFeedL2(_priceFeedL2);
     }
 
     function setPriceFeedL2(IPriceFeed _priceFeedL2) public onlyOwner {
@@ -86,6 +85,7 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
     //
 
     function updateLatestRoundData(bytes32 _priceFeedKey) external {
+        requireNonEmptyAddress(address(priceFeedL2));
         AggregatorV3Interface aggregator = getAggregator(_priceFeedKey);
         requireNonEmptyAddress(address(aggregator));
 

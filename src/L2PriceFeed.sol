@@ -84,8 +84,6 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
         uint256 _timestamp,
         uint256 _roundId
     ) external override onlyChainlink {
-        // TODO require that it is called by L1Pricefeed
-        //        require(IAMB(ambBridge).messageSender() == rootBridge, "sender not RootBridge");
         requireKeyExisted(_priceFeedKey, true);
         require(_timestamp > getLatestTimestamp(_priceFeedKey), "incorrect timestamp");
 
