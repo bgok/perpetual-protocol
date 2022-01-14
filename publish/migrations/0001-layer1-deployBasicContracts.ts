@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { ethers } from "ethers"
+import { ethers } from "hardhat"
 import { Layer } from "../../scripts/common"
 import {
     AmmReader,

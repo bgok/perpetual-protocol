@@ -34,7 +34,7 @@ abstract contract DecimalERC20 {
         (bool success, bytes memory data) =
             address(_token).call(abi.encodeWithSelector(_token.transfer.selector, _to, roundedDownValue));
 
-        require(success && (data.length == 0 || abi.decode(data, (bool))), "DecimalERC20: transfer failed");
+        require(success && (data.length == 0 || abi.decode(data, (bool))), "transfer failed");
         _validateBalance(_token, _to, roundedDownValue, balanceBefore);
     }
 
@@ -52,7 +52,7 @@ abstract contract DecimalERC20 {
         (bool success, bytes memory data) =
             address(_token).call(abi.encodeWithSelector(_token.transferFrom.selector, _from, _to, roundedDownValue));
 
-        require(success && (data.length == 0 || abi.decode(data, (bool))), "DecimalERC20: transferFrom failed");
+        require(success && (data.length == 0 || abi.decode(data, (bool))), "transferFrom failed");
         _validateBalance(_token, _to, roundedDownValue, balanceBefore);
     }
 
@@ -107,7 +107,7 @@ abstract contract DecimalERC20 {
         uint256 tokenDecimals = decimalMap[_token];
         if (tokenDecimals == 0) {
             (bool success, bytes memory data) = _token.staticcall(abi.encodeWithSignature("decimals()"));
-            require(success && data.length != 0, "DecimalERC20: get decimals failed");
+            require(success && data.length != 0, "get decimals failed");
             tokenDecimals = abi.decode(data, (uint256));
         }
         return tokenDecimals;
@@ -131,7 +131,7 @@ abstract contract DecimalERC20 {
         // solhint-disable avoid-low-level-calls
         (bool success, bytes memory data) =
             address(_token).call(abi.encodeWithSelector(_token.approve.selector, _spender, _toUint(_token, _value)));
-        require(success && (data.length == 0 || abi.decode(data, (bool))), "DecimalERC20: approve failed");
+        require(success && (data.length == 0 || abi.decode(data, (bool))), "approve failed");
     }
 
     // To prevent from deflationary token, check receiver's balance is as expectation.
@@ -143,7 +143,7 @@ abstract contract DecimalERC20 {
     ) private view {
         require(
             _balanceOf(_token, _to).cmp(_balanceBefore.addD(_toDecimal(_token, _roundedDownValue))) == 0,
-            "DecimalERC20: balance inconsistent"
+            "balance inconsistent"
         );
     }
 }
