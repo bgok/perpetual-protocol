@@ -160,7 +160,7 @@ describe.skip("StakingReserve Test", () => {
         it("failed when stake without approving", async () => {
             await expectRevert(
                 stakingReserve.depositAndStake(toDecimal(1), { from: staker }),
-                "DecimalERC20: transferFrom failed",
+                "transferFrom failed", // "DecimalERC20: transferFrom failed"
             )
         })
 

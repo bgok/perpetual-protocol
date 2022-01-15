@@ -16,7 +16,7 @@ import {
     StakingReserveInstance,
     SupplyScheduleFakeInstance,
     TraderWalletContract,
-    TraderWalletInstance
+    TraderWalletInstance,
 } from "../../../types/truffle"
 import { ClearingHouse } from "../../../types/web3/ClearingHouse"
 import { assertionHelper } from "../../helper/assertion-plugin"
@@ -260,7 +260,7 @@ describe("ClearingHouse Test", () => {
                 clearingHouse.openPosition(amm.address, Side.BUY, toDecimal(1), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "over limit",
+                "CH08", //"over limit",
             )
         })
 
@@ -509,7 +509,7 @@ describe("ClearingHouse Test", () => {
             // margin can't removed
             await expectRevert(
                 clearingHouse.removeMargin(amm.address, toDecimal(1), { from: bob }),
-                "margin is not enough",
+                "CH03", // "margin is not enough",
             )
         })
 
@@ -648,7 +648,7 @@ describe("ClearingHouse Test", () => {
 
             await expectRevert(
                 clearingHouse.removeMargin(amm.address, toDecimal(removedMargin), { from: alice }),
-                "revert margin is not enough",
+                "CH03", // "revert margin is not enough",
             )
         })
 
@@ -660,7 +660,7 @@ describe("ClearingHouse Test", () => {
             // margin ratio -> 24 / 600 = 4%
             await expectRevert(
                 clearingHouse.removeMargin(amm.address, toDecimal(removedMargin), { from: alice }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
     })
@@ -1181,7 +1181,7 @@ describe("ClearingHouse Test", () => {
             await syncAmmPriceToOracle()
             await expectRevert(
                 clearingHouse.liquidate(amm.address, alice, { from: carol }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
@@ -1215,12 +1215,12 @@ describe("ClearingHouse Test", () => {
             await syncAmmPriceToOracle()
             await expectRevert(
                 clearingHouse.liquidate(amm.address, alice, { from: carol }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
         it("force error, can't liquidate an empty position", async () => {
-            await expectRevert(clearingHouse.liquidate(amm.address, alice, { from: carol }), "positionSize is 0")
+            await expectRevert(clearingHouse.liquidate(amm.address, alice, { from: carol }), "CH13") // "positionSize is 0"
         })
 
         describe("fluctuation check when liquidating", () => {
@@ -1667,7 +1667,7 @@ describe("ClearingHouse Test", () => {
                 await clearingHouse.liquidate(amm.address, alice, { from: carol })
                 await expectRevert(
                     clearingHouse.closePosition(amm.address, toDecimal(0), { from: carol }),
-                    "only one action allowed",
+                    "CH14", // "only one action allowed",
                 )
             })
 
@@ -1682,7 +1682,7 @@ describe("ClearingHouse Test", () => {
                 await clearingHouse.liquidate(amm.address, alice, { from: carol })
                 await expectRevert(
                     clearingHouse.closePosition(amm.address, toDecimal(0), { from: carol }),
-                    "only one action allowed",
+                    "CH14", // "only one action allowed",
                 )
             })
 
@@ -1697,7 +1697,7 @@ describe("ClearingHouse Test", () => {
                 await clearingHouse.liquidate(amm.address, alice, { from: carol })
                 await expectRevert(
                     clearingHouse.closePosition(amm.address, toDecimal(0), { from: carol }),
-                    "only one action allowed",
+                    "CH14", // "only one action allowed",
                 )
             })
 
@@ -1712,7 +1712,7 @@ describe("ClearingHouse Test", () => {
                 await clearingHouse.liquidate(amm.address, alice, { from: carol })
                 await expectRevert(
                     clearingHouse.closePosition(amm.address, toDecimal(0), { from: carol }),
-                    "only one action allowed",
+                    "CH14", // "only one action allowed",
                 )
             })
 
@@ -1737,7 +1737,7 @@ describe("ClearingHouse Test", () => {
                 })
                 await syncAmmPriceToOracle()
                 await traderWallet2.liquidate(amm.address, alice, { from: bob })
-                await expectRevert(traderWallet1.closePosition(amm.address, { from: bob }), "only one action allowed")
+                await expectRevert(traderWallet1.closePosition(amm.address, { from: bob }), "CH14") // "only one action allowed"
             })
 
             it("liquidator can't open and liquidate position in the same block, even from different tx.origin", async () => {
@@ -1761,7 +1761,7 @@ describe("ClearingHouse Test", () => {
                 })
                 await syncAmmPriceToOracle()
                 await traderWallet2.liquidate(amm.address, alice, { from: carol })
-                await expectRevert(traderWallet1.closePosition(amm.address, { from: admin }), "only one action allowed")
+                await expectRevert(traderWallet1.closePosition(amm.address, { from: admin }), "CH14") // "only one action allowed"
             })
         })
     })
@@ -2104,7 +2104,7 @@ describe("ClearingHouse Test", () => {
         })
 
         it("can't pause by non-admin", async () => {
-            await expectRevert(clearingHouse.pause({ from: alice }), "PerpFiOwnableUpgrade: caller is not the owner")
+            await expectRevert(clearingHouse.pause({ from: alice }), "caller must be owner") // "PerpFiOwnableUpgrade: caller is not the owner"
         })
 
         it("pause then unpause by admin", async () => {
@@ -2127,7 +2127,7 @@ describe("ClearingHouse Test", () => {
 
         it("pause by admin and can not being paused by non-admin", async () => {
             await clearingHouse.pause()
-            await expectRevert(clearingHouse.pause({ from: alice }), "PerpFiOwnableUpgrade: caller is not the owner")
+            await expectRevert(clearingHouse.pause({ from: alice }), "caller must be owner") // "PerpFiOwnableUpgrade: caller is not the owner"
         })
     })
 
@@ -2201,7 +2201,7 @@ describe("ClearingHouse Test", () => {
                     toDecimal(0),
                     alice,
                 ),
-                "only one action allowed",
+                "CH14", // "only one action allowed",
             )
         })
 
@@ -2218,7 +2218,7 @@ describe("ClearingHouse Test", () => {
                     toDecimal(0),
                     alice,
                 ),
-                "only one action allowed",
+                "CH14", // "only one action allowed",
             )
         })
 
@@ -2262,7 +2262,7 @@ describe("ClearingHouse Test", () => {
                     toDecimal(0),
                     alice,
                 ),
-                "only one action allowed",
+                "CH14", // "only one action allowed",
             )
         })
 
@@ -2283,7 +2283,7 @@ describe("ClearingHouse Test", () => {
                     toDecimal(0),
                     alice,
                 ),
-                "positionSize is 0",
+                "CH13", // "positionSize is 0",
             )
         })
 
@@ -2323,7 +2323,7 @@ describe("ClearingHouse Test", () => {
                     toDecimal(0),
                     alice,
                 ),
-                "only one action allowed",
+                "CH14", // "only one action allowed",
             )
         })
 
@@ -2335,99 +2335,100 @@ describe("ClearingHouse Test", () => {
         })
     })
 
-    describe("openPosition & closePosition with referral code", () => {
+    // openPositionWithReferral() closePositionWithReferral() are disabled to reduce the contract bytecode size
+    describe.skip("openPosition & closePosition with referral code", () => {
         beforeEach(async () => {
             await approve(alice, clearingHouse.address, 1000)
             await approve(bob, clearingHouse.address, 1000)
         })
 
         it("openPosition with referral code", async () => {
-            const receipt = await clearingHouse.openPositionWithReferral(
-                amm.address,
-                Side.BUY,
-                toDecimal(50),
-                toDecimal(1),
-                toDecimal(0),
-                toBytes32("Hello world"),
-                {
-                    from: alice,
-                },
-            )
-
-            await expectEvent.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged", {
-                referralCode: toBytes32("Hello world"),
-            })
-            await expectEvent.inTransaction(receipt.tx, clearingHouse, "PositionChanged", {
-                trader: alice,
-                amm: amm.address,
-                margin: toFullDigit(50),
-            })
-            expect((await clearingHouse.getPosition(amm.address, alice)).margin).to.eq(toFullDigit(50))
+            // const receipt = await clearingHouse.openPositionWithReferral(
+            //     amm.address,
+            //     Side.BUY,
+            //     toDecimal(50),
+            //     toDecimal(1),
+            //     toDecimal(0),
+            //     toBytes32("Hello world"),
+            //     {
+            //         from: alice,
+            //     },
+            // )
+            //
+            // await expectEvent.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged", {
+            //     referralCode: toBytes32("Hello world"),
+            // })
+            // await expectEvent.inTransaction(receipt.tx, clearingHouse, "PositionChanged", {
+            //     trader: alice,
+            //     amm: amm.address,
+            //     margin: toFullDigit(50),
+            // })
+            // expect((await clearingHouse.getPosition(amm.address, alice)).margin).to.eq(toFullDigit(50))
         })
 
         it("force error, openPosition without referral code", async () => {
-            const receipt = await clearingHouse.openPositionWithReferral(
-                amm.address,
-                Side.BUY,
-                toDecimal(25),
-                toDecimal(2),
-                toDecimal(0),
-                EMPTY_STRING_IN_BYTES32,
-                {
-                    from: alice,
-                },
-            )
-
-            await expectEvent.not.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged")
-            expect((await clearingHouse.getPosition(amm.address, alice)).margin).to.eq(toFullDigit(25))
+            // const receipt = await clearingHouse.openPositionWithReferral(
+            //     amm.address,
+            //     Side.BUY,
+            //     toDecimal(25),
+            //     toDecimal(2),
+            //     toDecimal(0),
+            //     EMPTY_STRING_IN_BYTES32,
+            //     {
+            //         from: alice,
+            //     },
+            // )
+            //
+            // await expectEvent.not.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged")
+            // expect((await clearingHouse.getPosition(amm.address, alice)).margin).to.eq(toFullDigit(25))
         })
 
         it("closePosition with referral code", async () => {
-            await clearingHouse.openPositionWithReferral(
-                amm.address,
-                Side.BUY,
-                toDecimal(50),
-                toDecimal(1),
-                toDecimal(0),
-                toBytes32("Hello world"),
-                {
-                    from: alice,
-                },
-            )
-
-            const receipt = await clearingHouse.closePositionWithReferral(
-                amm.address,
-                toDecimal(0),
-                toBytes32("Hello world"),
-                { from: alice },
-            )
-
-            await expectEvent.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged", {
-                referralCode: toBytes32("Hello world"),
-            })
-            expect((await clearingHouse.getPosition(amm.address, alice)).margin).to.eq(toFullDigit(0))
+            // await clearingHouse.openPositionWithReferral(
+            //     amm.address,
+            //     Side.BUY,
+            //     toDecimal(50),
+            //     toDecimal(1),
+            //     toDecimal(0),
+            //     toBytes32("Hello world"),
+            //     {
+            //         from: alice,
+            //     },
+            // )
+            //
+            // const receipt = await clearingHouse.closePositionWithReferral(
+            //     amm.address,
+            //     toDecimal(0),
+            //     toBytes32("Hello world"),
+            //     { from: alice },
+            // )
+            //
+            // await expectEvent.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged", {
+            //     referralCode: toBytes32("Hello world"),
+            // })
+            // expect((await clearingHouse.getPosition(amm.address, alice)).margin).to.eq(toFullDigit(0))
         })
 
         it("force error, closePosition without referral code", async () => {
-            await clearingHouse.openPositionWithReferral(
-                amm.address,
-                Side.BUY,
-                toDecimal(50),
-                toDecimal(1),
-                toDecimal(0),
-                toBytes32("Hello world"),
-                {
-                    from: alice,
-                },
-            )
-
-            const receipt = await clearingHouse.closePositionWithReferral(
-                amm.address,
-                toDecimal(0),
-                EMPTY_STRING_IN_BYTES32,
-                { from: alice },
-            )
-            await expectEvent.not.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged")
+            // await clearingHouse.openPositionWithReferral(
+            //     amm.address,
+            //     Side.BUY,
+            //     toDecimal(50),
+            //     toDecimal(1),
+            //     toDecimal(0),
+            //     toBytes32("Hello world"),
+            //     {
+            //         from: alice,
+            //     },
+            // )
+            //
+            // const receipt = await clearingHouse.closePositionWithReferral(
+            //     amm.address,
+            //     toDecimal(0),
+            //     EMPTY_STRING_IN_BYTES32,
+            //     { from: alice },
+            // )
+            // await expectEvent.not.inTransaction(receipt.tx, clearingHouse, "ReferredPositionChanged")
         })
     })
 })

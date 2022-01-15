@@ -114,7 +114,7 @@ describe("tollPoolSpec", () => {
         it("force error, onlyOwner", async () => {
             await expectRevert(
                 tollPool.setFeeTokenPoolDispatcher(EMPTY_ADDRESS, { from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
             )
         })
 
@@ -144,7 +144,7 @@ describe("tollPoolSpec", () => {
         it("force error, onlyOwner", async () => {
             await expectRevert(
                 tollPool.addFeeToken(usdt.address, { from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner",
             )
         })
 
@@ -191,7 +191,7 @@ describe("tollPoolSpec", () => {
             await tollPool.addFeeToken(usdt.address)
             await expectRevert(
                 tollPool.removeFeeToken(usdt.address, { from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
             )
         })
 

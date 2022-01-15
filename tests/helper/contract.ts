@@ -285,11 +285,9 @@ export async function deployL2PriceFeed(keeper: string): Promise<L2PriceFeedFake
     return instance
 }
 
-export async function deployChainlinkL1(
-    priceFeedL2Address: string,
-): Promise<ChainlinkL1FakeInstance> {
+export async function deployChainlinkL1(): Promise<ChainlinkL1FakeInstance> {
     const instance = await ChainlinkL1Fake.new()
-    await instance.initialize(priceFeedL2Address)
+    await instance.initialize()
     return instance
 }
 

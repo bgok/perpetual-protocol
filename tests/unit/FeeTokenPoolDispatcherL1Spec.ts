@@ -154,7 +154,7 @@ describe("FeeTokenPoolDispatcherL1Spec", () => {
         it("force error, onlyOwner", async () => {
             await expectRevert(
                 feeTokenPoolDispatcher.addFeeRewardPool(feeRewardPoolMock1.address, { from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner",
             )
         })
 
@@ -224,7 +224,7 @@ describe("FeeTokenPoolDispatcherL1Spec", () => {
             await feeTokenPoolDispatcher.addFeeRewardPool(feeRewardPoolMock1.address)
             await expectRevert(
                 feeTokenPoolDispatcher.removeFeeRewardPool(feeRewardPoolMock1.address, { from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner",
             )
         })
 

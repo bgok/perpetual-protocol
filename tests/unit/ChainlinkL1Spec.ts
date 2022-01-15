@@ -30,15 +30,9 @@ describe("chainlinkL1 Spec", () => {
         return web3.utils.hexToUtf8(str)
     }
 
-    describe("initialize()", () => {
-        it("force error, PriceFeedL2 address cannot be address(0)", async () => {
-            await expectRevert(deployChainlinkL1(EMPTY_ADDRESS), "empty address")
-        })
-    })
-
     describe("setPriceFeedL2()", () => {
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(priceFeedL2.address)
+            chainlinkL1 = await deployChainlinkL1()
         })
 
         it("set the address of PriceFeedL2", async () => {
@@ -56,7 +50,8 @@ describe("chainlinkL1 Spec", () => {
 
     describe("addAggregator", () => {
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(priceFeedL2.address)
+            chainlinkL1 = await deployChainlinkL1()
+            await chainlinkL1.setPriceFeedL2(priceFeedL2.address)
         })
 
         it("getAggregator with existed aggregator key", async () => {
@@ -87,7 +82,8 @@ describe("chainlinkL1 Spec", () => {
 
     describe("removeAggregator", () => {
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(priceFeedL2.address)
+            chainlinkL1 = await deployChainlinkL1()
+            await chainlinkL1.setPriceFeedL2(priceFeedL2.address)
         })
 
         it("remove 1 aggregator when there's only 1", async () => {
@@ -118,7 +114,8 @@ describe("chainlinkL1 Spec", () => {
 
     describe("updateLatestRoundData()", () => {
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(priceFeedL2.address)
+            chainlinkL1 = await deployChainlinkL1()
+            await chainlinkL1.setPriceFeedL2(priceFeedL2.address)
             await chainlinkL1.addAggregator(stringToBytes32("ETH"), chainlinkAggregator.address)
             await chainlinkAggregator.mockAddAnswer(8, 12345678, 1, 200000000000, 1)
         })

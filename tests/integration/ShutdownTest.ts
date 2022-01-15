@@ -299,7 +299,7 @@ describe("Protocol shutdown test", () => {
             expect(await amm.open()).eq(false)
             expect(await amm.getSettlementPrice()).to.not.eq(0)
 
-            const error = "amm was closed"
+            const error = "CH10" // "amm was closed"
             await expectRevert(
                 clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(100), toDecimal(2), toDecimal(0), {
                     from: bob,
@@ -355,7 +355,7 @@ describe("Protocol shutdown test", () => {
 
             const aliceReceipt = await clearingHouse.settlePosition(amm.address, { from: alice })
             await expectEvent.inTransaction(aliceReceipt.tx, quoteToken, "Transfer")
-            await expectRevert(clearingHouse.settlePosition(amm.address, { from: alice }), "positionSize is 0")
+            await expectRevert(clearingHouse.settlePosition(amm.address, { from: alice }), "CH13") // "positionSize is 0"
         })
 
         it("force error, amm is open", async () => {
@@ -364,7 +364,7 @@ describe("Protocol shutdown test", () => {
                 from: alice,
             })
 
-            await expectRevert(clearingHouse.settlePosition(amm.address, { from: alice }), "amm is open")
+            await expectRevert(clearingHouse.settlePosition(amm.address, { from: alice }), "CH11") // "amm is open"
         })
 
         describe("how much refund trader can get", () => {
@@ -470,7 +470,7 @@ describe("Protocol shutdown test", () => {
 
                 await expectRevert(
                     clearingHouse.settlePosition(amm.address, { from: bob }),
-                    "VM Exception while processing transaction: revert DecimalERC20: transfer failed",
+                    "transfer failed", // "VM Exception while processing transaction: revert DecimalERC20: transfer failed"
                 )
                 const r = await clearingHouse.settlePosition(amm.address, { from: carol })
                 expectEvent.inTransaction(r.tx, clearingHouse, "PositionSettled", { valueTransferred: "0" })

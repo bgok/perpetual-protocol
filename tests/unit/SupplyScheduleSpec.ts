@@ -52,7 +52,7 @@ describe.skip("Supply Schedule Unit Test", () => {
         it("can't start by account which is not owner", async () => {
             await expectRevert(
                 supplySchedule.startSchedule({ from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner",
             )
         })
 

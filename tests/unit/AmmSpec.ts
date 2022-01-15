@@ -106,7 +106,7 @@ describe("Amm Unit Test", () => {
         })
 
         it("force error: stranger close amm", async () => {
-            await expectRevert(amm.setOpen(false, { from: alice }), "PerpFiOwnableUpgrade: caller is not the owner")
+            await expectRevert(amm.setOpen(false, { from: alice }), "caller must be owner") // "PerpFiOwnableUpgrade: caller is not the owner"
         })
     })
 
@@ -150,7 +150,7 @@ describe("Amm Unit Test", () => {
         })
 
         it("force error, only owner can set fee/spread ratio", async () => {
-            const error = "PerpFiOwnableUpgrade: caller is not the owner"
+            const error = "caller must be owner" // "PerpFiOwnableUpgrade: caller is not the owner"
             await expectRevert(amm.setTollRatio(toDecimal(0.2), { from: alice }), error)
             await expectRevert(amm.setSpreadRatio(toDecimal(0.2), { from: alice }), error)
         })

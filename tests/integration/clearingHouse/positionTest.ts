@@ -530,7 +530,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.closePosition(amm.address, toDecimal(0), {
                     from: alice,
                 }),
-                "positionSize is 0",
+                "CH13", // "positionSize is 0",
             )
         })
 
@@ -849,7 +849,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.BUY, toDecimal(141), toDecimal(10), toDecimal(0), {
                     from: alice,
                 }),
-                "DecimalERC20: transferFrom failed",
+                "transferFrom failed", // "DecimalERC20: transferFrom failed"
             )
         })
 
@@ -858,7 +858,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(60), toDecimal(21), toDecimal(37.5), {
                     from: alice,
                 }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
@@ -968,7 +968,7 @@ describe("ClearingHouse - open/close position Test", () => {
             // margin ratio: = (margin + unrealizedPnl) / positionNotional = 21.23 / 321.23 = 6.608971765%
             await expectRevert(
                 clearingHouse.liquidate(amm.address, alice, { from: carol }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
@@ -1039,7 +1039,7 @@ describe("ClearingHouse - open/close position Test", () => {
             //   margin ratio = (150 + 360) / 960 = 53.125% (won't liquidate)
             await expectRevert(
                 clearingHouse.liquidate(amm.address, alice, { from: carol }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
@@ -1077,7 +1077,7 @@ describe("ClearingHouse - open/close position Test", () => {
             //   margin ratio = (20 + 40) / 160 = 37.5% (won't liquidate)
             await expectRevert(
                 clearingHouse.liquidate(amm.address, alice, { from: carol }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
@@ -1200,14 +1200,14 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.BUY, toDecimal(1), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
 
             await expectRevert(
                 clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(1), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
@@ -1230,7 +1230,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(1), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "Margin ratio not meet criteria",
+                "CH15", // "Margin ratio not meet criteria",
             )
         })
 
@@ -1485,7 +1485,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.BUY, toDecimal(120), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "hit position size upper bound",
+                "CH04", // "hit position size upper bound",
             )
         })
 
@@ -1499,7 +1499,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.BUY, toDecimal(60), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "hit position size upper bound",
+                "CH04", // "hit position size upper bound",
             )
         })
 
@@ -1509,7 +1509,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(95), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "hit position size upper bound",
+                "CH04", // "hit position size upper bound",
             )
         })
 
@@ -1523,7 +1523,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(50), toDecimal(1), toDecimal(0), {
                     from: alice,
                 }),
-                "hit position size upper bound",
+                "CH04", // "hit position size upper bound",
             )
         })
 
@@ -1538,7 +1538,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(20), toDecimal(10), toDecimal(0), {
                     from: alice,
                 }),
-                "hit position size upper bound",
+                "CH04", // "hit position size upper bound",
             )
         })
 
@@ -1553,7 +1553,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.BUY, toDecimal(21), toDecimal(10), toDecimal(0), {
                     from: alice,
                 }),
-                "hit position size upper bound",
+                "CH04", // "hit position size upper bound",
             )
         })
 
@@ -1605,7 +1605,7 @@ describe("ClearingHouse - open/close position Test", () => {
                     clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(25), toDecimal(10), toDecimal(0), {
                         from: alice,
                     }),
-                    "hit position size upper bound",
+                    "CH04", // "hit position size upper bound",
                 )
             })
 
@@ -1622,7 +1622,7 @@ describe("ClearingHouse - open/close position Test", () => {
                     clearingHouse.openPosition(amm.address, Side.SELL, toDecimal(25), toDecimal(10), toDecimal(0), {
                         from: alice,
                     }),
-                    "hit position size upper bound",
+                    "CH04", // "hit position size upper bound",
                 )
 
                 await clearingHouse.setWhitelist(alice)
@@ -1886,7 +1886,7 @@ describe("ClearingHouse - open/close position Test", () => {
             // fee would be 170.422 * 10% = 17.04
             await expectRevert(
                 clearingHouse.closePosition(amm.address, toDecimal(0), { from: alice }),
-                "DecimalERC20: transferFrom failed",
+                "transferFrom failed", // "DecimalERC20: transferFrom failed"
             )
         })
 
@@ -1900,7 +1900,7 @@ describe("ClearingHouse - open/close position Test", () => {
                 clearingHouse.openPosition(amm.address, Side.BUY, toDecimal(300), toDecimal(2), toDecimal(37.5), {
                     from: alice,
                 }),
-                "DecimalERC20: transferFrom failed",
+                "transferFrom failed", // "DecimalERC20: transferFrom failed"
             )
         })
 
