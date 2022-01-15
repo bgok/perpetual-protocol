@@ -7,7 +7,6 @@ import { Decimal } from "./utils/Decimal.sol";
 import { PerpFiOwnableUpgrade } from "./utils/PerpFiOwnableUpgrade.sol";
 import { DecimalERC20 } from "./utils/DecimalERC20.sol";
 import { AddressArray } from "./utils/AddressArray.sol";
-import { ClientBridge } from "./bridge/xDai/ClientBridge.sol";
 
 contract TollPool is PerpFiOwnableUpgrade, DecimalERC20 {
     using Decimal for Decimal.decimal;
@@ -40,7 +39,6 @@ contract TollPool is PerpFiOwnableUpgrade, DecimalERC20 {
     address[] public feeTokens;
 
     address public clearingHouse;
-    ClientBridge public clientBridge;
 
     //**********************************************************//
     //    The above state variables can not change the order    //
@@ -54,11 +52,10 @@ contract TollPool is PerpFiOwnableUpgrade, DecimalERC20 {
     //
     // FUNCTIONS
     //
-    function initialize(address _clearingHouse, ClientBridge _clientBridge) external initializer {
-        require(address(_clearingHouse) != address(0) && address(_clientBridge) != address(0), "invalid input");
+    function initialize(address _clearingHouse) external initializer {
+        require(address(_clearingHouse) != address(0), "invalid input");
         __Ownable_init();
         clearingHouse = _clearingHouse;
-        clientBridge = _clientBridge;
     }
 
     function transferToFeeTokenPoolDispatcher() external {
@@ -117,8 +114,8 @@ contract TollPool is PerpFiOwnableUpgrade, DecimalERC20 {
         Decimal.decimal memory balance = _balanceOf(_token, address(this));
 
         if (balance.toUint() != 0) {
-            _approve(_token, address(clientBridge), balance);
-            clientBridge.erc20Transfer(_token, address(feeTokenPoolDispatcherL1), balance);
+            _approve(_token, address(feeTokenPoolDispatcherL1), balance);
+            _transfer(_token, address(feeTokenPoolDispatcherL1), balance);
             emit TokenTransferred(address(_token), balance.toUint());
             return true;
         }

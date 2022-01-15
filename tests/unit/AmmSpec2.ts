@@ -73,7 +73,7 @@ describe("Amm Unit Test 2 (Waffle)", async () => {
 
         it("set priceFeed via non-owner causes revert transaction", async () => {
             await expect(amm.connect(wallet2).setPriceFeed(l2PriceFeed.address)).to.be.revertedWith(
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner",
             )
         })
 

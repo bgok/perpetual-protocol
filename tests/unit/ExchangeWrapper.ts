@@ -19,6 +19,7 @@ import {
 } from "../../types/truffle"
 import { deployErc20Fake, deployExchangeWrapper, deployMockBalancer, deployMockCUsdt } from "../helper/contract"
 import { toDecimal, toFullDigit } from "../helper/number"
+
 use(chaiAsPromised)
 
 const ExchangeWrapper = artifacts.require("ExchangeWrapper") as ExchangeWrapperContract
@@ -117,19 +118,19 @@ describe.skip("ExchangeWrapper UT", () => {
     it("force error, only owner can setBalancerPool", async () => {
         await expectRevert(
             exchangeWrapper.setBalancerPool(alice, { from: alice }),
-            "PerpFiOwnableUpgrade: caller is not the owner",
+            "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
         )
     })
     it("force error, only owner can setCompoundCUsdt", async () => {
         await expectRevert(
             exchangeWrapper.setCompoundCUsdt(alice, { from: alice }),
-            "PerpFiOwnableUpgrade: caller is not the owner",
+            "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
         )
     })
     it("force error, only owner can approve", async () => {
         await expectRevert(
             exchangeWrapper.approve(alice, alice, toDecimal(10), { from: alice }),
-            "PerpFiOwnableUpgrade: caller is not the owner",
+            "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
         )
     })
 })

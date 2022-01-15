@@ -41,23 +41,23 @@ describe("PerpFiOwnableUpgrade UT", () => {
     it("force error, only owner can call setOwner", async () => {
         await expectRevert(
             perpFiOwnable.setOwner(alice, { from: alice }),
-            "PerpFiOwnableUpgrade: caller is not the owner",
+            "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner",
         )
     })
 
     it("force error set current owner", async () => {
-        await expectRevert(perpFiOwnable.setOwner(admin), "PerpFiOwnableUpgrade: same as original")
+        await expectRevert(perpFiOwnable.setOwner(admin), "same as original") //"PerpFiOwnableUpgrade: same as original"
     })
 
     it("force error, update owner but caller not the new owner", async () => {
         await perpFiOwnable.setOwner(alice)
-        await expectRevert(perpFiOwnable.updateOwner({ from: admin }), "PerpFiOwnableUpgrade: not the new owner")
+        await expectRevert(perpFiOwnable.updateOwner({ from: admin }), "not the new owner") // "PerpFiOwnableUpgrade: same as original"
     })
 
     it("force error, update owner without set a new owner first", async () => {
         await expectRevert(
             perpFiOwnable.updateOwner({ from: admin }),
-            "PerpFiOwnableUpgrade: candidate is zero address",
+            "candidate is zero address", // "PerpFiOwnableUpgrade: candidate is zero address"
         )
     })
 
@@ -67,7 +67,7 @@ describe("PerpFiOwnableUpgrade UT", () => {
         expectEvent.inTransaction(r.tx, perpFiOwnable, "OwnershipTransferred")
         await expectRevert(
             perpFiOwnable.updateOwner({ from: alice }),
-            "PerpFiOwnableUpgrade: candidate is zero address",
+            "candidate is zero address", // "PerpFiOwnableUpgrade: candidate is zero address",
         )
     })
 })

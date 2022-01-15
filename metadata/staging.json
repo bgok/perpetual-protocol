@@ -2,13 +2,41 @@
   "layers": {
     "layer1": {
       "contracts": {
-        "RootBridge": {
-          "name": "RootBridge",
-          "address": "0xEEc999b78A37507e24B06AcdC5fdeb2565262AC2"
-        },
         "ChainlinkL1": {
           "name": "ChainlinkL1",
-          "address": "0xED8C2dca49b9474d0820E7a7848DEFeB52D6d327"
+          "address": "0xB1AF2cEC467929A3394215cE7511a18497dB7D03"
+        },
+        "MetaTxGateway": {
+          "name": "MetaTxGateway",
+          "address": "0xeEdaD0bC3228a702D2D20a91C167F87236306de7"
+        },
+        "InsuranceFund": {
+          "name": "InsuranceFund",
+          "address": "0xF48010708524d70ac5367F8e79c6949678b7f448"
+        },
+        "L2PriceFeed": {
+          "name": "L2PriceFeed",
+          "address": "0x21f140046325cc6a977CFb601fA52fB347E7A9B2"
+        },
+        "ClearingHouse": {
+          "name": "ClearingHouse",
+          "address": "0x124650FfF6cd6d3242Ef0296C2F2dAB8F8109878"
+        },
+        "ETHUSDC": {
+          "name": "Amm",
+          "address": "0x677F4153cBd0F76850598143113d093a4CdBB379"
+        },
+        "BTCUSDC": {
+          "name": "Amm",
+          "address": "0x2193dC93e2910B2e43A7Df357aB935b8a05Ed6a7"
+        },
+        "ClearingHouseViewer": {
+          "name": "ClearingHouseViewer",
+          "address": "0xDe7b44abca9856c1d1F990bea917087e437B6C32"
+        },
+        "AmmReader": {
+          "name": "AmmReader",
+          "address": "0xe846a76EcfF77109324015d0F78Eda32554168E8"
         }
       },
       "accounts": [],
@@ -25,44 +53,7 @@
       }
     },
     "layer2": {
-      "contracts": {
-        "MetaTxGateway": {
-          "name": "MetaTxGateway",
-          "address": "0xE0063f7A4355D7bDD1743D8f87D58024BB8B605d"
-        },
-        "ClientBridge": {
-          "name": "ClientBridge",
-          "address": "0xa9c903dF56C0C138f72F8Cef86b22E2B20a45DB2"
-        },
-        "InsuranceFund": {
-          "name": "InsuranceFund",
-          "address": "0x3a517E0f33cbD89Fa8a52BB73Aa8DFBDF7eC3BF7"
-        },
-        "L2PriceFeed": {
-          "name": "L2PriceFeed",
-          "address": "0x1c367ee4a5282D135d43b4D6dfb75715D33903cf"
-        },
-        "ClearingHouse": {
-          "name": "ClearingHouse",
-          "address": "0xBf5a34C02b891D2c40572223cE4A25a04bB63f8d"
-        },
-        "ETHUSDC": {
-          "name": "Amm",
-          "address": "0x35500bA676ED28551dda6D09E722e58B1B8517d0"
-        },
-        "BTCUSDC": {
-          "name": "Amm",
-          "address": "0x379Fb2Bb681688b9f05F4a21c40ea90C0aCA5056"
-        },
-        "ClearingHouseViewer": {
-          "name": "ClearingHouseViewer",
-          "address": "0x3f16339Be8A87FA4784D4821B26456D5c1bbe1AF"
-        },
-        "AmmReader": {
-          "name": "AmmReader",
-          "address": "0x263944494efA2768B59F7C115143159Acb11aafd"
-        }
-      },
+      "contracts": {},
       "accounts": [],
       "network": "tbsc",
       "externalContracts": {

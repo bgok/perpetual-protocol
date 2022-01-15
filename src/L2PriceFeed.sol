@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity 0.6.9;
 
-import { IAMB } from "./bridge/external/IAMB.sol";
 import { SafeMath } from "@openzeppelin/contracts-ethereum-package/contracts/math/SafeMath.sol";
 import { IPriceFeed } from "./interface/IPriceFeed.sol";
 import { BlockContext } from "./utils/BlockContext.sol";
@@ -10,8 +9,8 @@ import { PerpFiOwnableUpgrade } from "./utils/PerpFiOwnableUpgrade.sol";
 contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
     using SafeMath for uint256;
 
-    modifier onlyBridge() {
-        require(_msgSender() == ambBridge, "!ambBridge");
+    modifier onlyChainlink() {
+        require(_msgSender() == chainlink, "!chainlink");
         _;
     }
 
@@ -32,8 +31,7 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
     //    Can not change the order of below state variables     //
     //**********************************************************//
 
-    address public ambBridge;
-    address public rootBridge;
+    address public chainlink;
 
     // key by currency symbol, eg ETH
     mapping(bytes32 => PriceFeed) public priceFeedMap;
@@ -51,10 +49,9 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
     //
     // FUNCTIONS
     //
-    function initialize(address _ambBridge, address _rootBridge) public initializer {
+    function initialize(address _chainlink) public initializer {
         __Ownable_init();
-        ambBridge = _ambBridge;
-        rootBridge = _rootBridge;
+        chainlink = _chainlink;
     }
 
     function addAggregator(bytes32 _priceFeedKey) external onlyOwner {
@@ -77,11 +74,6 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
         }
     }
 
-    function setRootBridge(address _rootBridge) external onlyOwner {
-        require(_rootBridge != address(0), "addr is empty");
-        rootBridge = _rootBridge;
-    }
-
     //
     // INTERFACE IMPLEMENTATION
     //
@@ -91,8 +83,7 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
         uint256 _price,
         uint256 _timestamp,
         uint256 _roundId
-    ) external override onlyBridge {
-        require(IAMB(ambBridge).messageSender() == rootBridge, "sender not RootBridge");
+    ) external override onlyChainlink {
         requireKeyExisted(_priceFeedKey, true);
         require(_timestamp > getLatestTimestamp(_priceFeedKey), "incorrect timestamp");
 
@@ -225,14 +216,14 @@ contract L2PriceFeed is IPriceFeed, PerpFiOwnableUpgrade, BlockContext {
     }
 
     function isExistedKey(bytes32 _priceFeedKey) private view returns (bool) {
-        return true; //priceFeedMap[_priceFeedKey].registered;
+        return priceFeedMap[_priceFeedKey].registered;
     }
 
     function requireKeyExisted(bytes32 _key, bool _existed) private view {
-        //        if (_existed) {
-        //            require(isExistedKey(_key), "key not existed");
-        //        } else {
-        //            require(!isExistedKey(_key), "key existed");
-        //        }
+        if (_existed) {
+            require(isExistedKey(_key), "key not existed");
+        } else {
+            require(!isExistedKey(_key), "key existed");
+        }
     }
 }

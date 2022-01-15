@@ -52,10 +52,12 @@ contract PerpFiOwnableUpgrade is ContextUpgradeSafe {
      * @dev Throws if called by any account other than the owner.
      */
     modifier onlyOwner() {
-        require(
-            _owner == _msgSender() /*, "PerpFiOwnableUpgrade: caller is not the owner"*/
-        );
+        checkOwner();
         _;
+    }
+
+    function checkOwner() private {
+        require(_owner == _msgSender(), "caller must be owner");
     }
 
     /**
@@ -75,15 +77,9 @@ contract PerpFiOwnableUpgrade is ContextUpgradeSafe {
      * Can only be called by the current owner.
      */
     function setOwner(address newOwner) public onlyOwner {
-        require(
-            newOwner != address(0) /*, "PerpFiOwnableUpgrade: zero address"*/
-        );
-        require(
-            newOwner != _owner /*, "PerpFiOwnableUpgrade: same as original"*/
-        );
-        require(
-            newOwner != _candidate /*, "PerpFiOwnableUpgrade: same as candidate"*/
-        );
+        require(newOwner != address(0), "zero address");
+        require(newOwner != _owner, "same as original");
+        require(newOwner != _candidate, "same as candidate");
         _candidate = newOwner;
     }
 
@@ -92,12 +88,8 @@ contract PerpFiOwnableUpgrade is ContextUpgradeSafe {
      * Can only be called by the new owner.
      */
     function updateOwner() public {
-        require(
-            _candidate != address(0) /*, "PerpFiOwnableUpgrade: candidate is zero address"*/
-        );
-        require(
-            _candidate == _msgSender() /*, "PerpFiOwnableUpgrade: not the new owner"*/
-        );
+        require(_candidate != address(0), "candidate is zero address");
+        require(_candidate == _msgSender(), "not the new owner");
 
         emit OwnershipTransferred(_owner, _candidate);
         _owner = _candidate;

@@ -1,22 +1,19 @@
 import { web3 } from "hardhat"
 import { expectEvent, expectRevert } from "@openzeppelin/test-helpers"
 import BN from "bn.js"
-import { AMBBridgeMockInstance, L2PriceFeedFakeInstance } from "../../types/truffle"
-import { deployL2PriceFeed, deployMockAMBBridge } from "../helper/contract"
+import { L2PriceFeedFakeInstance } from "../../types/truffle"
+import { deployL2PriceFeed } from "../helper/contract"
 import { toFullDigit } from "../helper/number"
 
 describe("L2PriceFeed Spec", () => {
     let addresses: string[]
     let admin: string
     let l2PriceFeed!: L2PriceFeedFakeInstance
-    let ambBridge: AMBBridgeMockInstance
 
     beforeEach(async () => {
         addresses = await web3.eth.getAccounts()
         admin = addresses[0]
-        ambBridge = await deployMockAMBBridge()
-        l2PriceFeed = await deployL2PriceFeed(ambBridge.address, admin)
-        await ambBridge.mockSetMessageSender(admin)
+        l2PriceFeed = await deployL2PriceFeed(admin)
     })
 
     function toBytes32(str: string): string {
@@ -71,7 +68,6 @@ describe("L2PriceFeed Spec", () => {
     describe("setLatestData/getPrice/getLatestTimestamp", () => {
         beforeEach(async () => {
             await l2PriceFeed.addAggregator(toBytes32("ETH"))
-            await l2PriceFeed.mockSetMsgSender(ambBridge.address)
         })
 
         it("setLatestData", async () => {
@@ -113,7 +109,6 @@ describe("L2PriceFeed Spec", () => {
 
             const currentTime = await l2PriceFeed.mock_getCurrentTimestamp()
 
-            await l2PriceFeed.mockSetMsgSender(ambBridge.address)
             await l2PriceFeed.setLatestData(toBytes32("ETH"), toFullDigit(400), currentTime.addn(15), 100)
             await l2PriceFeed.setLatestData(toBytes32("ETH"), toFullDigit(410), currentTime.addn(30), 101)
             await l2PriceFeed.setLatestData(toBytes32("ETH"), toFullDigit(420), currentTime.addn(45), 102)
@@ -169,8 +164,6 @@ describe("L2PriceFeed Spec", () => {
     describe("twap", () => {
         beforeEach(async () => {
             await l2PriceFeed.addAggregator(toBytes32("ETH"))
-            await ambBridge.mockSetMessageSender(admin)
-            await l2PriceFeed.mockSetMsgSender(ambBridge.address)
 
             const currentTime = await l2PriceFeed.mock_getCurrentTimestamp()
             await l2PriceFeed.mock_setBlockTimestamp(currentTime.addn(15))
@@ -236,7 +229,6 @@ describe("L2PriceFeed Spec", () => {
         let baseTimestamp: BN
         beforeEach(async () => {
             await l2PriceFeed.addAggregator(toBytes32("ETH"))
-            await l2PriceFeed.mockSetMsgSender(ambBridge.address)
 
             const currentTime = await l2PriceFeed.mock_getCurrentTimestamp()
             baseTimestamp = currentTime

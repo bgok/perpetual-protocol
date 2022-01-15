@@ -208,15 +208,14 @@ contract ClearingHouse is
         IInsuranceFund _insuranceFund,
         address _trustedForwarder
     ) public initializer {
-        // FIXME
-        require(
-            address(_insuranceFund) != address(0) /*, "Invalid IInsuranceFund"*/
-        );
+        require(address(_insuranceFund) != address(0), "CH01");
+        // "Invalid IInsuranceFund" - Removed due to excessive bytecode size
 
         __OwnerPausable_init();
         __ReentrancyGuard_init();
 
-        versionRecipient = "1.0.0"; // we are not using it atm
+        versionRecipient = "1.0.0";
+        // we are not using it atm
         initMarginRatio = Decimal.decimal(_initMarginRatio);
         maintenanceMarginRatio = Decimal.decimal(_maintenanceMarginRatio);
         liquidationFeeRatio = Decimal.decimal(_liquidationFeeRatio);
@@ -270,9 +269,8 @@ contract ClearingHouse is
      * @dev only owner can call
      */
     function setPartialLiquidationRatio(Decimal.decimal memory _ratio) external onlyOwner {
-        require(
-            _ratio.cmp(Decimal.one()) <= 0 /*, "invalid partial liquidation ratio"*/
-        );
+        require(_ratio.cmp(Decimal.one()) <= 0, "CH02");
+        // "invalid partial liq. ratio"
         partialLiquidationRatio = _ratio;
     }
 
@@ -315,9 +313,8 @@ contract ClearingHouse is
             SignedDecimal.signedDecimal memory fundingPayment,
             SignedDecimal.signedDecimal memory latestCumulativePremiumFraction
         ) = calcRemainMarginWithFundingPayment(_amm, position, marginDelta);
-        require(
-            badDebt.toUint() == 0 /*, "margin is not enough"*/
-        );
+        require(badDebt.toUint() == 0, "CH03");
+        // "margin is not enough"
         position.margin = remainMargin;
         position.lastUpdatedCumulativePremiumFraction = latestCumulativePremiumFraction;
         setPosition(_amm, trader, position);
@@ -407,19 +404,21 @@ contract ClearingHouse is
      * @param _baseAssetAmountLimit minimum base asset amount expected to get to prevent from slippage.
      * @param _referralCode referral code
      */
-    function openPositionWithReferral(
-        IAmm _amm,
-        Side _side,
-        Decimal.decimal calldata _quoteAssetAmount,
-        Decimal.decimal calldata _leverage,
-        Decimal.decimal calldata _baseAssetAmountLimit,
-        bytes32 _referralCode
-    ) external {
-        openPosition(_amm, _side, _quoteAssetAmount, _leverage, _baseAssetAmountLimit);
-        if (_referralCode != 0) {
-            emit ReferredPositionChanged(_referralCode);
-        }
-    }
+
+    // TODO This code was removed due exceeding the bytcode limit
+    //    function openPositionWithReferral(
+    //        IAmm _amm,
+    //        Side _side,
+    //        Decimal.decimal calldata _quoteAssetAmount,
+    //        Decimal.decimal calldata _leverage,
+    //        Decimal.decimal calldata _baseAssetAmountLimit,
+    //        bytes32 _referralCode
+    //    ) external {
+    //        openPosition(_amm, _side, _quoteAssetAmount, _leverage, _baseAssetAmountLimit);
+    //        if (_referralCode != 0) {
+    //            emit ReferredPositionChanged(_referralCode);
+    //        }
+    //    }
 
     /**
      * @notice open a position
@@ -520,16 +519,17 @@ contract ClearingHouse is
      * @param _amm IAmm address
      * @param _referralCode referral code
      */
-    function closePositionWithReferral(
-        IAmm _amm,
-        Decimal.decimal calldata _quoteAssetAmountLimit,
-        bytes32 _referralCode
-    ) external {
-        closePosition(_amm, _quoteAssetAmountLimit);
-        if (_referralCode != 0) {
-            emit ReferredPositionChanged(_referralCode);
-        }
-    }
+    // TODO This code was removed due exceeding the bytcode limit
+    //    function closePositionWithReferral(
+    //        IAmm _amm,
+    //        Decimal.decimal calldata _quoteAssetAmountLimit,
+    //        bytes32 _referralCode
+    //    ) external {
+    //        closePosition(_amm, _quoteAssetAmountLimit);
+    //        if (_referralCode != 0) {
+    //            emit ReferredPositionChanged(_referralCode);
+    //        }
+    //    }
 
     /**
      * @notice close all the positions
@@ -940,9 +940,8 @@ contract ClearingHouse is
             Decimal.decimal memory maxHoldingBaseAsset = _amm.getMaxHoldingBaseAsset();
             if (maxHoldingBaseAsset.toUint() > 0) {
                 // total position size should be less than `positionUpperBound`
-                require(
-                    newSize.abs().cmp(maxHoldingBaseAsset) <= 0 /*, "hit position size upper bound"*/
-                );
+                require(newSize.abs().cmp(maxHoldingBaseAsset) <= 0, "CH04");
+                //"hit position size upper bound"
             }
         }
 
@@ -1031,9 +1030,8 @@ contract ClearingHouse is
                     : positionResp.unrealizedPnlAfter.addD(oldPositionNotional).subD(
                         positionResp.exchangedQuoteAssetAmount
                     );
-            require(
-                remainOpenNotional.toInt() > 0 /*, "value of openNotional <= 0"*/
-            );
+            require(remainOpenNotional.toInt() > 0, "CH05");
+            //"value of openNotional <= 0"
 
             positionResp.position = Position(
                 oldPosition.size.addD(positionResp.exchangedPositionSize),
@@ -1062,9 +1060,8 @@ contract ClearingHouse is
         PositionResp memory closePositionResp = internalClosePosition(_amm, _trader, Decimal.zero());
 
         // the old position is underwater. trader should close a position first
-        require(
-            closePositionResp.badDebt.toUint() == 0 /*, "reduce an underwater position"*/
-        );
+        require(closePositionResp.badDebt.toUint() == 0, "CH06");
+        // "reduce an underwater position"
 
         // update open notional after closing position
         Decimal.decimal memory openNotional =
@@ -1170,9 +1167,8 @@ contract ClearingHouse is
 
             // transfer toll to feePool
             if (hasToll) {
-                require(
-                    address(feePool) != address(0) /*, "Invalid feePool"*/
-                );
+                require(address(feePool) != address(0), "CH07");
+                //"Invalid feePool"
                 _transferFrom(quoteAsset, _from, address(feePool), toll);
             }
 
@@ -1238,9 +1234,8 @@ contract ClearingHouse is
             }
             if (_amount.toInt() > 0) {
                 // whitelist won't be restrict by open interest cap
-                require(
-                    updatedOpenInterestNotional.toUint() <= cap || _msgSender() == whitelist /*, "over limit"*/
-                );
+                require(updatedOpenInterestNotional.toUint() <= cap || _msgSender() == whitelist, "CH08");
+                //"over limit"
             }
             openInterestNotionalMap[ammAddr] = updatedOpenInterestNotional.abs();
         }
@@ -1370,32 +1365,27 @@ contract ClearingHouse is
     // REQUIRE FUNCTIONS
     //
     function requireAmm(IAmm _amm, bool _open) private view {
-        require(
-            insuranceFund.isExistedAmm(_amm) /*, "amm not found"*/
-        );
-        require(
-            _open == _amm.open() /*, _open ? "amm was closed" : "amm is open"*/
-        );
+        require(insuranceFund.isExistedAmm(_amm), "CH09");
+        // "amm not found"
+        require(_open == _amm.open(), _open ? "CH10" : "CH11");
+        // CH10: "amm was closed", "amm is open"
     }
 
     function requireNonZeroInput(Decimal.decimal memory _decimal) private pure {
-        require(
-            _decimal.toUint() != 0 /*, "input is 0"*/
-        );
+        require(_decimal.toUint() != 0, "CH12");
+        // "input is 0"
     }
 
     function requirePositionSize(SignedDecimal.signedDecimal memory _size) private pure {
-        require(
-            _size.toInt() != 0 /*, "positionSize is 0"*/
-        );
+        require(_size.toInt() != 0, "CH13");
+        //"positionSize is 0"
     }
 
     function requireNotRestrictionMode(IAmm _amm) private view {
         uint256 currentBlock = _blockNumber();
         if (currentBlock == ammMap[address(_amm)].lastRestrictionBlock) {
-            require(
-                getUnadjustedPosition(_amm, _msgSender()).blockNumber != currentBlock /*, "only one action allowed"*/
-            );
+            require(getUnadjustedPosition(_amm, _msgSender()).blockNumber != currentBlock, "CH14");
+            // "only one action allowed"
         }
     }
 
@@ -1406,8 +1396,8 @@ contract ClearingHouse is
     ) private pure {
         int256 remainingMarginRatio = _marginRatio.subD(_baseMarginRatio).toInt();
         require(
-            _largerThanOrEqualTo ? remainingMarginRatio >= 0 : remainingMarginRatio < 0 /*,
-            "Margin ratio not meet criteria"*/
+            _largerThanOrEqualTo ? remainingMarginRatio >= 0 : remainingMarginRatio < 0,
+            "CH15" // "Margin ratio not meet criteria"
         );
     }
 }

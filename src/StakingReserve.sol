@@ -219,10 +219,10 @@ contract StakingReserve is
         // Note this is initialized AFTER a new entry is pushed to epochRewardHistory, hence the minus 1
         uint256 currentEpochIndex = nextEpochIndex().sub(1);
         for (uint256 i; i < feeTokens.length; i++) {
-            IERC20 token = feeTokens[i];
-            emit FeeInEpoch(address(token), feeMap[token].toUint(), currentEpochIndex);
-            epochRewardHistory[currentEpochIndex].feeMap[address(token)] = feeMap[token];
-            feeMap[token] = Decimal.zero();
+            IERC20 feeToken = feeTokens[i];
+            emit FeeInEpoch(address(feeToken), feeMap[feeToken].toUint(), currentEpochIndex);
+            epochRewardHistory[currentEpochIndex].feeMap[address(feeToken)] = feeMap[feeToken];
+            feeMap[feeToken] = Decimal.zero();
         }
 
         // update totalEffectiveStakeMap for coming epoch
@@ -330,13 +330,13 @@ contract StakingReserve is
             Decimal.decimal memory effectiveStakePercentage = latestLockedStake.divD(totalEffectiveStakeMap[i]);
 
             for (uint256 j = 0; j < numberOfTokens; j++) {
-                IERC20 token = feeTokens[j];
-                Decimal.decimal memory feeInThisEpoch = getFeeOfEpoch(i, address(token));
+                IERC20 feeToken = feeTokens[j];
+                Decimal.decimal memory feeInThisEpoch = getFeeOfEpoch(i, address(feeToken));
                 if (feeInThisEpoch.toUint() == 0) {
                     continue;
                 }
                 feeBalance[j].balance = feeBalance[j].balance.addD(feeInThisEpoch.mulD(effectiveStakePercentage));
-                feeBalance[j].token = address(token);
+                feeBalance[j].token = address(feeToken);
             }
         }
     }

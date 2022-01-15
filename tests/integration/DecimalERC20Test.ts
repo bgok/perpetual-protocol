@@ -128,14 +128,14 @@ describe("DecimalERC20", () => {
         it("approve", async () => {
             await expectRevert(
                 decimalErc20.approve(erc20Minimal.address, alice, toDecimal(5)),
-                "DecimalERC20: get decimals failed",
+                "get decimals failed", // "DecimalERC20: get decimals failed"
             )
         })
 
         it("allowance", async () => {
             await expectRevert(
                 decimalErc20.allowance(erc20Minimal.address, admin, alice),
-                "DecimalERC20: get decimals failed",
+                "get decimals failed", // "DecimalERC20: get decimals failed"
             )
         })
 
@@ -143,7 +143,7 @@ describe("DecimalERC20", () => {
             await erc20Minimal.transfer(decimalErc20.address, toFullDigit(5))
             await expectRevert(
                 decimalErc20.transfer(erc20Minimal.address, alice, toDecimal(5)),
-                "DecimalERC20: get decimals failed",
+                "get decimals failed", // "DecimalERC20: get decimals failed"
             )
         })
 
@@ -153,7 +153,7 @@ describe("DecimalERC20", () => {
             await erc20Minimal.transfer(decimalErc20.address, fiveInEightDigit)
             await expectRevert(
                 decimalErc20.balanceOf(erc20Minimal.address, decimalErc20.address),
-                "DecimalERC20: get decimals failed",
+                "get decimals failed", // "DecimalERC20: get decimals failed"
             )
         })
 
@@ -161,7 +161,7 @@ describe("DecimalERC20", () => {
             await erc20Minimal.approve(decimalErc20.address, toFullDigit(5))
             await expectRevert(
                 decimalErc20.transferFrom(erc20Minimal.address, admin, alice, toDecimal(5)),
-                "DecimalERC20: get decimals failed",
+                "get decimals failed", // "DecimalERC20: get decimals failed"
             )
         })
     })
@@ -240,7 +240,7 @@ describe("DecimalERC20", () => {
 
                 await expectRevert(
                     decimalErc20.transfer(tether.address, alice, toDecimal(1)),
-                    "DecimalERC20: balance inconsistent",
+                    "balance inconsistent", // "DecimalERC20: balance inconsistent"
                 )
             })
 
@@ -248,7 +248,7 @@ describe("DecimalERC20", () => {
                 await tether.approve(decimalErc20.address, new BN(5).mul(digit))
                 await expectRevert(
                     decimalErc20.transferFrom(tether.address, admin, alice, toDecimal(1)),
-                    "DecimalERC20: balance inconsistent",
+                    "balance inconsistent", // "DecimalERC20: balance inconsistent"
                 )
             })
         })
@@ -309,7 +309,7 @@ describe("DecimalERC20", () => {
         it("should fail when transfer more than allowance", async () => {
             await expectRevert(
                 decimalErc20.transfer(erc20.address, alice, toDecimal(1)),
-                "DecimalERC20: transfer failed",
+                "transfer failed", // "DecimalERC20: transfer failed"
             )
         })
     })

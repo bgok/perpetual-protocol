@@ -151,7 +151,7 @@ class MetaTxGatewaySpec {
     async rejectNonOwnerWhitelisting(): Promise<void> {
         await expectRevert(
             this.metaTxGateway.addToWhitelists("0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef", { from: this.alice }),
-            "PerpFiOwnableUpgrade: caller is not the owner",
+            "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
         )
     }
 

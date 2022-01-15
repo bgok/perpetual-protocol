@@ -133,7 +133,7 @@ describe("StakedPerpTokenSpec", () => {
         it("force error, balance is insufficient", async () => {
             await expectRevert(
                 stakedPerpToken.stake(toDecimal(6000), { from: alice }),
-                "DecimalERC20: transferFrom failed",
+                "transferFrom failed", // "DecimalERC20: transferFrom failed"
             )
         })
 
@@ -323,7 +323,7 @@ describe("StakedPerpTokenSpec", () => {
         it("force error, onlyOwner", async () => {
             await expectRevert(
                 stakedPerpToken.addStakeModule(feeRewardPoolMock1.address, { from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
             )
         })
 
@@ -354,7 +354,7 @@ describe("StakedPerpTokenSpec", () => {
         it("force error, onlyOwner", async () => {
             await expectRevert(
                 stakedPerpToken.removeStakeModule(feeRewardPoolMock1.address, { from: alice }),
-                "PerpFiOwnableUpgrade: caller is not the owner",
+                "caller must be owner", // "PerpFiOwnableUpgrade: caller is not the owner"
             )
         })
 

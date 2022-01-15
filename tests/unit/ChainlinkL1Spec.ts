@@ -2,10 +2,10 @@ import { web3 } from "hardhat"
 import { expectEvent, expectRevert } from "@openzeppelin/test-helpers"
 import BN from "bn.js"
 import { expect, use } from "chai"
-import { ChainlinkAggregatorMockInstance, ChainlinkL1Instance, RootBridgeMockInstance } from "../../types/truffle"
+import { ChainlinkAggregatorMockInstance, ChainlinkL1Instance, L2PriceFeedMockInstance } from "../../types/truffle"
 import { assertionHelper } from "../helper/assertion-plugin"
-import { deployChainlinkL1 } from "../helper/contract"
-import { deployChainlinkAggregatorMock, deployRootBridgeMock } from "../helper/mockContract"
+import { deployChainlinkL1, deployL2MockPriceFeed } from "../helper/contract"
+import { deployChainlinkAggregatorMock } from "../helper/mockContract"
 
 use(assertionHelper)
 
@@ -13,13 +13,13 @@ describe("chainlinkL1 Spec", () => {
     let addresses: string[]
     let chainlinkL1!: ChainlinkL1Instance
     let chainlinkAggregator!: ChainlinkAggregatorMockInstance
-    let rootBridgeMock!: RootBridgeMockInstance
+    let priceFeedL2!: L2PriceFeedMockInstance
     const EMPTY_ADDRESS = "0x0000000000000000000000000000000000000000"
 
     beforeEach(async () => {
         addresses = await web3.eth.getAccounts()
         chainlinkAggregator = await deployChainlinkAggregatorMock()
-        rootBridgeMock = await deployRootBridgeMock()
+        priceFeedL2 = await deployL2MockPriceFeed(new BN(4123.45))
     })
 
     function stringToBytes32(str: string): string {
@@ -30,38 +30,17 @@ describe("chainlinkL1 Spec", () => {
         return web3.utils.hexToUtf8(str)
     }
 
-    describe("initialize()", () => {
-        it("force error, RootBridge address cannot be address(0)", async () => {
-            await expectRevert(deployChainlinkL1(EMPTY_ADDRESS, addresses[1]), "empty address")
-        })
-
-        it("force error, PriceFeedL2 address cannot be address(0)", async () => {
-            await expectRevert(deployChainlinkL1(addresses[1], EMPTY_ADDRESS), "empty address")
-        })
-    })
-
-    describe("setRootBridge(), setPriceFeedL2()", () => {
+    describe("setPriceFeedL2()", () => {
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(rootBridgeMock.address, addresses[1])
-        })
-
-        it("set the address of RootBridge", async () => {
-            const receipt = await chainlinkL1.setRootBridge(addresses[1])
-            await expectEvent.inTransaction(receipt.tx, chainlinkL1, "RootBridgeChanged", { rootBridge: addresses[1] })
-            expect(await chainlinkL1.rootBridge()).eq(addresses[1])
+            chainlinkL1 = await deployChainlinkL1()
         })
 
         it("set the address of PriceFeedL2", async () => {
-            const receipt = await chainlinkL1.setPriceFeedL2(addresses[1])
+            const receipt = await chainlinkL1.setPriceFeedL2(priceFeedL2.address)
             await expectEvent.inTransaction(receipt.tx, chainlinkL1, "PriceFeedL2Changed", {
-                priceFeedL2: addresses[1],
+                priceFeedL2: priceFeedL2.address,
             })
-            expect(await chainlinkL1.priceFeedL2Address()).eq(addresses[1])
-        })
-
-        // expectRevert section
-        it("force error, RootBridge address cannot be address(0)", async () => {
-            await expectRevert(chainlinkL1.setRootBridge(EMPTY_ADDRESS), "empty address")
+            expect(await chainlinkL1.priceFeedL2()).eq(priceFeedL2.address)
         })
 
         it("force error, PriceFeedL2 address cannot be address(0)", async () => {
@@ -71,7 +50,8 @@ describe("chainlinkL1 Spec", () => {
 
     describe("addAggregator", () => {
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(rootBridgeMock.address, addresses[1])
+            chainlinkL1 = await deployChainlinkL1()
+            await chainlinkL1.setPriceFeedL2(priceFeedL2.address)
         })
 
         it("getAggregator with existed aggregator key", async () => {
@@ -102,7 +82,8 @@ describe("chainlinkL1 Spec", () => {
 
     describe("removeAggregator", () => {
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(rootBridgeMock.address, addresses[1])
+            chainlinkL1 = await deployChainlinkL1()
+            await chainlinkL1.setPriceFeedL2(priceFeedL2.address)
         })
 
         it("remove 1 aggregator when there's only 1", async () => {
@@ -132,29 +113,35 @@ describe("chainlinkL1 Spec", () => {
     })
 
     describe("updateLatestRoundData()", () => {
-        const _messageId = 20
-        const _messageIdBytes32 = "0x0000000000000000000000000000000000000000000000000000000000000014"
-
         beforeEach(async () => {
-            chainlinkL1 = await deployChainlinkL1(rootBridgeMock.address, addresses[1])
+            chainlinkL1 = await deployChainlinkL1()
+            await chainlinkL1.setPriceFeedL2(priceFeedL2.address)
             await chainlinkL1.addAggregator(stringToBytes32("ETH"), chainlinkAggregator.address)
-            await rootBridgeMock.mockSetMessageId(_messageId)
             await chainlinkAggregator.mockAddAnswer(8, 12345678, 1, 200000000000, 1)
         })
 
         it("get latest data", async () => {
             const receipt = await chainlinkL1.updateLatestRoundData(stringToBytes32("ETH"))
-            await expectEvent.inTransaction(receipt.tx, chainlinkL1, "PriceUpdateMessageIdSent", {
-                messageId: _messageIdBytes32,
+            await expectEvent.inTransaction(receipt.tx, chainlinkL1, "PriceUpdated", {
+                roundId: "8",
+                price: "123456780000000000",
+                timestamp: "200000000000",
             })
-            // reported price should be normalized to 18 decimals
-            expect(await rootBridgeMock.price()).eq(new BN("123456780000000000"))
+            await expectEvent.inTransaction(receipt.tx, priceFeedL2, "PriceFeedDataSet", {
+                key: stringToBytes32("ETH").padEnd(66, "0"),
+                roundId: "8",
+                price: "12345678",
+                timestamp: "200000000000",
+            })
+
         })
 
         it("get latest data, a specified keeper is not required", async () => {
             const receipt = await chainlinkL1.updateLatestRoundData(stringToBytes32("ETH"), { from: addresses[1] })
-            await expectEvent.inTransaction(receipt.tx, chainlinkL1, "PriceUpdateMessageIdSent", {
-                messageId: _messageIdBytes32,
+            await expectEvent.inTransaction(receipt.tx, chainlinkL1, "PriceUpdated", {
+                roundId: "8",
+                price: "123456780000000000",
+                timestamp: "200000000000",
             })
         })
 
