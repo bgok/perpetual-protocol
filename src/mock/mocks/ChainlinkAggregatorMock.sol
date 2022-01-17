@@ -9,13 +9,20 @@ contract ChainlinkAggregatorMock is AggregatorV3Interface {
     uint256[] decimalsArray;
     uint256[] timestampArray;
     uint80[] versionArray;
+    string descriptionContainer;
+    uint8 decimalsContainer;
+
+    constructor(uint8 _decimals, string memory _description) public {
+        decimalsContainer = _decimals;
+        descriptionContainer = _description;
+    }
 
     function decimals() external view override returns (uint8) {
-        return 8;
+        return decimalsContainer;
     }
 
     function description() external view override returns (string memory) {
-        return "";
+        return descriptionContainer;
     }
 
     function version() external view override returns (uint256) {
@@ -69,5 +76,13 @@ contract ChainlinkAggregatorMock is AggregatorV3Interface {
         decimalsArray.push(_startedAt);
         timestampArray.push(_updatedAt);
         versionArray.push(_answeredInRound);
+    }
+
+    function setDescription(string memory _description) external {
+        descriptionContainer = _description;
+    }
+
+    function setDecimals(uint8 _decimals) external {
+        decimalsContainer = _decimals;
     }
 }

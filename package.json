@@ -24,6 +24,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@chainlink/abi": "^0.1.4",
         "@chainlink/contracts": "0.0.10",
         "@ethersproject/experimental": "5.0.7",
         "@istanbuljs/nyc-config-typescript": "1.0.1",

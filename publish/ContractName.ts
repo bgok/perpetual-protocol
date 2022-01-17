@@ -38,6 +38,7 @@ export enum ContractName {
     FeeRewardPoolL1 = "FeeRewardPoolL1",
     FeeTokenPoolDispatcherL1 = "FeeTokenPoolDispatcherL1",
     ChainlinkPriceFeed = "ChainlinkPriceFeed",
+    ChainlinkAggregatorMock = "ChainlinkAggregatorMock"
 }
 
 export enum ContractFullyQualifiedName {
