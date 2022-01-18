@@ -35,6 +35,7 @@ import {
     XDAI_URL,
 } from "./constants"
 import { TASK_CHECK_CHAINLINK, TASK_MIGRATE, TASK_PING_PRICE_UPDATE, TASK_SIMULATE } from "./scripts/common"
+import { updatePriceFromFeed } from "./publish/update-price-from-feed"
 
 task(TASK_CHECK_CHAINLINK, "Check Chainlink")
     .addParam("address", "a Chainlink aggregator address")
@@ -88,6 +89,15 @@ task(TASK_PING_PRICE_UPDATE, "call the price update endpoint using update-price-
         // eslint-disable-next-line @typescript-eslint/no-var-requires
         const { updatePriceFromFeed } = require("./publish/update-price-from-feed")
         await updatePriceFromFeed(hre)
+    })
+
+task("setMockPrice", "set the price of a mock aggregator")
+    .addPositionalParam("stage", "Target stage of the deployment")
+    .addPositionalParam("priceFeedKey", "The currency to set the price for")
+    .addPositionalParam("price", "The price to push")
+    .setAction(async ({ stage, priceFeedKey, price }, hre) => {
+        const { setMockPrice } = require("./scripts/set-mock-price")
+        await setMockPrice(hre, { stage, priceFeedKey, price })
     })
 
 const config: HardhatUserConfig = {

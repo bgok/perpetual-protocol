@@ -9,7 +9,7 @@ import { MigrationContext, MigrationDefinition } from "../Migration"
 async function createMockPriceFeedAggregator(priceFeedKey: string, context: MigrationContext) {
     console.log(`Deploy mock aggregator for ${priceFeedKey}`)
     const mockAggregator = await context.factory.create<AggregatorV3Interface>(
-        `src/mock/mocks/ChainlinkAggregatorMock.sol:ChainlinkAggregatorMock${priceFeedKey}` as ContractFullyQualifiedName,
+        `src/mock/mocks/ChainlinkAggregatorMock.sol:ChainlinkAggregatorMock` as ContractFullyQualifiedName,
     )
         .deployImmutableContract(8, `Mock aggregator of ${priceFeedKey} prices`)
 
@@ -17,10 +17,11 @@ async function createMockPriceFeedAggregator(priceFeedKey: string, context: Migr
         .create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1)
         .instance()
     try {
-        const rcpt = await chainlink.removeAggregator(priceFeedKey)
+        const rcpt = await chainlink.removeAggregator(ethers.utils.formatBytes32String(priceFeedKey))
         await rcpt.wait()
         console.log(`Previously registered ${priceFeedKey} Aggregator was removed`)
     } catch (e) {
+        console.log(e)
         console.log(`no ${priceFeedKey} Aggregator was previously registered`)
     }
 

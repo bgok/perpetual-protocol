@@ -37,6 +37,10 @@
         "AmmReader": {
           "name": "AmmReader",
           "address": "0xe846a76EcfF77109324015d0F78Eda32554168E8"
+        },
+        "ChainlinkAggregatorMock": {
+          "name": "ChainlinkAggregatorMock",
+          "address": "0x340af2F45b3405f759B5450968E166b86402fb3B"
         }
       },
       "accounts": [],
