@@ -28,7 +28,7 @@ coverage.json
 .openzeppelin/.session
 .openzeppelin/*-31337.json
 
-.env.*
+.env
 
 flattened
 addAggregator_*.txt
