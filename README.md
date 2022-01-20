@@ -122,5 +122,13 @@ functionData: 0x3f0e084f534e5800000000000000000000000000000000000000000000000000
 
 When you send a transaction on gnosis app, we can use `functionData` to check if the transaction data is correct.
 
+## Key commands
+
+Build: > `npm run clean && npm run build`
+Deploy: > `npm run deploy staging`
+Set market price: > `npx hardhat --network tbsc setMockPrice staging ETH 3839`
+Get prices: > `npx hardhat --network tbsc run scripts/getPrices.ts`
+
 ## License
+
 GPL3.0 or later

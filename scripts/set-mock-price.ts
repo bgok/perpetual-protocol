@@ -1,9 +1,7 @@
 import { ChainlinkL1, L2PriceFeed } from "../types/ethers"
 import { ContractFullyQualifiedName } from "../publish/ContractName"
 import { getCurrentTimestamp } from "hardhat/internal/hardhat-network/provider/utils/getCurrentTimestamp"
-import { Fragment, JsonFragment } from "@ethersproject/abi"
-import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
-import { BigNumber, Contract } from "ethers"
+import { BigNumber } from "ethers"
 import { ethers } from "hardhat"
 import { Layer, Stage } from "./common"
 import { MigrationContext } from "../publish/Migration"
@@ -17,10 +15,6 @@ interface SetMockPriceArgumentsInterface {
     stage: Stage,
     priceFeedKey: string,
     price: number
-}
-
-function instance(address: string, abi: Array<string | Fragment | JsonFragment>, signer: SignerWithAddress): Contract {
-    return new ethers.Contract(address, abi, signer) as Contract
 }
 
 function generateContext(stage: Stage, layer: Layer): MigrationContext {
@@ -41,6 +35,7 @@ function generateContext(stage: Stage, layer: Layer): MigrationContext {
     }
 }
 
+// price must be an integer
 export async function setMockPrice(env: HardhatRuntimeEnvironment, {
     stage,
     priceFeedKey,
@@ -62,7 +57,7 @@ export async function setMockPrice(env: HardhatRuntimeEnvironment, {
     }
     const timeStamp = prevTimeStamp < getCurrentTimestamp() ? getCurrentTimestamp() : prevTimeStamp + 1
 
-    console.log("Gettiing the mock aggregator address")
+    console.log("Getting the mock aggregator address")
     const chainlinkL1 = await context.factory.create<ChainlinkL1>(ContractFullyQualifiedName.ChainlinkL1).instance()
     const aggregatorAddress = await chainlinkL1.getAggregator(byte32PriceFeedKey)
     console.log(`Aggregator found for ${priceFeedKey}: ${aggregatorAddress}`)
@@ -86,9 +81,12 @@ export async function setMockPrice(env: HardhatRuntimeEnvironment, {
     console.log("New price added to L2PriceFeed")
 
     // Sanity check
+    const expectedPrice = formattedPrice
+        .mul(BigNumber.from(10).pow(18))
+        .div(BigNumber.from(10).pow(decimals))
     const newPrice = await priceFeed.getPrice(byte32PriceFeedKey)
     console.assert(
-        newPrice.eq(formattedPrice),
-        `Saved price doesn't match expected value. Expected: ${formattedPrice.toString()}, Actual: ${newPrice.toString()}`,
+        newPrice.eq(expectedPrice),
+        `Saved price doesn't match expected value. Expected: ${expectedPrice.toString()}, Actual: ${newPrice.toString()}`,
     )
 }

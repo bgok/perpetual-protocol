@@ -474,7 +474,7 @@
           {
             "contract": "L2PriceFeed",
             "label": "priceFeedMap",
-            "type": "t_mapping(t_bytes32,t_struct(PriceFeed)20617_storage)",
+            "type": "t_mapping(t_bytes32,t_struct(PriceFeed)20616_storage)",
             "src": "src/L2PriceFeed.sol:37"
           },
           {
@@ -494,13 +494,13 @@
           "t_address": {
             "label": "address"
           },
-          "t_mapping(t_bytes32,t_struct(PriceFeed)20617_storage)": {
+          "t_mapping(t_bytes32,t_struct(PriceFeed)20616_storage)": {
             "label": "mapping(bytes32 => struct L2PriceFeed.PriceFeed)"
           },
           "t_bytes32": {
             "label": "bytes32"
           },
-          "t_struct(PriceFeed)20617_storage": {
+          "t_struct(PriceFeed)20616_storage": {
             "label": "struct L2PriceFeed.PriceFeed",
             "members": [
               {
@@ -509,17 +509,17 @@
               },
               {
                 "label": "priceData",
-                "type": "t_array(t_struct(PriceData)20611_storage)dyn_storage"
+                "type": "t_array(t_struct(PriceData)20610_storage)dyn_storage"
               }
             ]
           },
           "t_bool": {
             "label": "bool"
           },
-          "t_array(t_struct(PriceData)20611_storage)dyn_storage": {
+          "t_array(t_struct(PriceData)20610_storage)dyn_storage": {
             "label": "struct L2PriceFeed.PriceData[]"
           },
-          "t_struct(PriceData)20611_storage": {
+          "t_struct(PriceData)20610_storage": {
             "label": "struct L2PriceFeed.PriceData",
             "members": [
               {
@@ -1144,6 +1144,124 @@
           },
           "t_array(t_uint256)50_storage": {
             "label": "uint256[50]"
+          }
+        }
+      }
+    },
+    "216797460f0a27f9a9c3df208573af25bac2fe0fb0ce30700f81a740a750ac43": {
+      "address": "0x3fe366aC43A598E1d8677308bF0d87Cd9980e6fB",
+      "txHash": "0xac2c95d15e9ce39ce88b6751d7225a7d4fed8f99ffeb00fd3ac2884900a802c7",
+      "layout": {
+        "storage": [
+          {
+            "contract": "Initializable",
+            "label": "initialized",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:21"
+          },
+          {
+            "contract": "Initializable",
+            "label": "initializing",
+            "type": "t_bool",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:26"
+          },
+          {
+            "contract": "Initializable",
+            "label": "______gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/Initializable.sol:61"
+          },
+          {
+            "contract": "ContextUpgradeSafe",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "@openzeppelin/contracts-ethereum-package/contracts/GSN/Context.sol:37"
+          },
+          {
+            "contract": "PerpFiOwnableUpgrade",
+            "label": "_owner",
+            "type": "t_address",
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:20"
+          },
+          {
+            "contract": "PerpFiOwnableUpgrade",
+            "label": "_candidate",
+            "type": "t_address",
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:21"
+          },
+          {
+            "contract": "PerpFiOwnableUpgrade",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "src/utils/PerpFiOwnableUpgrade.sol:99"
+          },
+          {
+            "contract": "BlockContext",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "src/utils/BlockContext.sol:13"
+          },
+          {
+            "contract": "ChainlinkL1",
+            "label": "priceFeedMap",
+            "type": "t_mapping(t_bytes32,t_contract(AggregatorV3Interface)45)",
+            "src": "src/ChainlinkL1.sol:27"
+          },
+          {
+            "contract": "ChainlinkL1",
+            "label": "priceFeedKeys",
+            "type": "t_array(t_bytes32)dyn_storage",
+            "src": "src/ChainlinkL1.sol:28"
+          },
+          {
+            "contract": "ChainlinkL1",
+            "label": "priceFeedL2",
+            "type": "t_contract(IPriceFeed)26681",
+            "src": "src/ChainlinkL1.sol:29"
+          },
+          {
+            "contract": "ChainlinkL1",
+            "label": "prevTimestampMap",
+            "type": "t_mapping(t_bytes32,t_uint256)",
+            "src": "src/ChainlinkL1.sol:30"
+          },
+          {
+            "contract": "ChainlinkL1",
+            "label": "__gap",
+            "type": "t_array(t_uint256)50_storage",
+            "src": "src/ChainlinkL1.sol:45"
+          }
+        ],
+        "types": {
+          "t_mapping(t_bytes32,t_contract(AggregatorV3Interface)45)": {
+            "label": "mapping(bytes32 => contract AggregatorV3Interface)"
+          },
+          "t_bytes32": {
+            "label": "bytes32"
+          },
+          "t_contract(AggregatorV3Interface)45": {
+            "label": "contract AggregatorV3Interface"
+          },
+          "t_array(t_bytes32)dyn_storage": {
+            "label": "bytes32[]"
+          },
+          "t_contract(IPriceFeed)26681": {
+            "label": "contract IPriceFeed"
+          },
+          "t_mapping(t_bytes32,t_uint256)": {
+            "label": "mapping(bytes32 => uint256)"
+          },
+          "t_uint256": {
+            "label": "uint256"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]"
+          },
+          "t_address": {
+            "label": "address"
+          },
+          "t_bool": {
+            "label": "bool"
           }
         }
       }

@@ -96,7 +96,7 @@ contract ChainlinkL1 is PerpFiOwnableUpgrade, BlockContext {
         uint8 decimals = aggregator.decimals();
 
         Decimal.decimal memory decimalPrice = Decimal.decimal(formatDecimals(uint256(price), decimals));
-        priceFeedL2.setLatestData(_priceFeedKey, uint256(price), timestamp, roundId);
+        priceFeedL2.setLatestData(_priceFeedKey, decimalPrice.toUint(), timestamp, roundId);
         emit PriceUpdated(roundId, decimalPrice.toUint(), timestamp);
 
         prevTimestampMap[_priceFeedKey] = timestamp;
