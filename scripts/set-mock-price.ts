@@ -14,7 +14,8 @@ import { HardhatRuntimeEnvironment } from "hardhat/types"
 interface SetMockPriceArgumentsInterface {
     stage: Stage,
     priceFeedKey: string,
-    price: number
+    price: number,
+    noUpdate: boolean
 }
 
 function generateContext(stage: Stage, layer: Layer): MigrationContext {
@@ -40,6 +41,7 @@ export async function setMockPrice(env: HardhatRuntimeEnvironment, {
     stage,
     priceFeedKey,
     price,
+    noUpdate,
 }: SetMockPriceArgumentsInterface) {
     const byte32PriceFeedKey = ethers.utils.formatBytes32String(priceFeedKey)
 
@@ -77,16 +79,18 @@ export async function setMockPrice(env: HardhatRuntimeEnvironment, {
     )).wait()
     console.log(`Price of ${priceFeedKey} set to: ${price}`)
 
-    await (await chainlinkL1.updateLatestRoundData(byte32PriceFeedKey)).wait()
-    console.log("New price added to L2PriceFeed")
+    if (!noUpdate) {
+        await (await chainlinkL1.updateLatestRoundData(byte32PriceFeedKey)).wait()
+        console.log("New price added to L2PriceFeed")
 
-    // Sanity check
-    const expectedPrice = formattedPrice
-        .mul(BigNumber.from(10).pow(18))
-        .div(BigNumber.from(10).pow(decimals))
-    const newPrice = await priceFeed.getPrice(byte32PriceFeedKey)
-    console.assert(
-        newPrice.eq(expectedPrice),
-        `Saved price doesn't match expected value. Expected: ${expectedPrice.toString()}, Actual: ${newPrice.toString()}`,
-    )
+        // Sanity check
+        const expectedPrice = formattedPrice
+            .mul(BigNumber.from(10).pow(18))
+            .div(BigNumber.from(10).pow(decimals))
+        const newPrice = await priceFeed.getPrice(byte32PriceFeedKey)
+        console.assert(
+            newPrice.eq(expectedPrice),
+            `Saved price doesn't match expected value. Expected: ${expectedPrice.toString()}, Actual: ${newPrice.toString()}`,
+        )
+    }
 }

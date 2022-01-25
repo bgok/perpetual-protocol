@@ -95,9 +95,10 @@ task("setMockPrice", "set the price of a mock aggregator")
     .addPositionalParam("stage", "Target stage of the deployment")
     .addPositionalParam("priceFeedKey", "The currency to set the price for")
     .addPositionalParam("price", "The price to push")
-    .setAction(async ({ stage, priceFeedKey, price }, hre) => {
+    .addFlag("noUpdate", "Don't update the perp contract data after price is changed")
+    .setAction(async ({ stage, priceFeedKey, price, noUpdate = false }, hre) => {
         const { setMockPrice } = require("./scripts/set-mock-price")
-        await setMockPrice(hre, { stage, priceFeedKey, price })
+        await setMockPrice(hre, { stage, priceFeedKey, price, noUpdate })
     })
 
 const config: HardhatUserConfig = {
