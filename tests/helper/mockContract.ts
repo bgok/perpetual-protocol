@@ -29,7 +29,7 @@ export async function deployAmmMock(): Promise<AmmMockInstance> {
 }
 
 export async function deployChainlinkAggregatorMock(): Promise<ChainlinkAggregatorMockInstance> {
-    return ChainlinkAggregatorMock.new()
+    return ChainlinkAggregatorMock.new(8, "")
 }
 
 export async function deployChainlinkL1Mock(): Promise<ChainlinkL1MockInstance> {

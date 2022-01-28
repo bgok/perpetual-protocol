@@ -130,7 +130,7 @@ describe("chainlinkL1 Spec", () => {
             await expectEvent.inTransaction(receipt.tx, priceFeedL2, "PriceFeedDataSet", {
                 key: stringToBytes32("ETH").padEnd(66, "0"),
                 roundId: "8",
-                price: "12345678",
+                price: "123456780000000000",
                 timestamp: "200000000000",
             })
 
